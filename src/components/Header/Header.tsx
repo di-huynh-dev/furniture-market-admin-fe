@@ -1,11 +1,12 @@
+import { useAuthStoreSelectors } from '@/store/auth-store'
+import { LoginData } from '@/types/user.type'
 import { Layout } from 'antd'
 const { Header } = Layout
 import { Avatar, Space, Dropdown, Input } from 'antd'
 import type { MenuProps } from 'antd'
 import { LogOut, Settings, User, Bell, Search } from 'lucide-react'
-const HeaderComponent = () => {
-  const url = 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg'
-
+const HeaderComponent = ({ auth }: { auth: LoginData }) => {
+  const removeAuth = useAuthStoreSelectors.use.removeAuth()
   const items: MenuProps['items'] = [
     {
       key: '1',
@@ -27,11 +28,7 @@ const HeaderComponent = () => {
     },
     {
       key: '3',
-      label: (
-        <a target="_blank" rel="noopener noreferrer" href="https://www.luohanacademy.com">
-          Đăng xuất
-        </a>
-      ),
+      label: <button onClick={removeAuth}>Đăng xuất</button>,
       icon: <LogOut className="w-5 h-5" />,
     },
   ]
@@ -51,7 +48,7 @@ const HeaderComponent = () => {
           <Bell className="w-5 h-5" />
           <Dropdown menu={{ items }}>
             <Space>
-              <Avatar src={<img src={url} alt="avatar" />} />
+              <Avatar src={<img src={auth?.user.avatar} alt="avatar" />} />
             </Space>
           </Dropdown>
         </div>
