@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Layout } from 'antd'
-import { Outlet, useNavigate } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import { Header } from '@/components'
 import Sidebar from '@/components/Sider/Sidebar'
 import useAuthStore from '@/store/auth-store'
@@ -8,12 +8,7 @@ const { Content, Footer } = Layout
 
 const HomeLayout: React.FC = () => {
   const { auth } = useAuthStore()
-  const navigate = useNavigate()
-  useEffect(() => {
-    if (!auth.accessToken) {
-      navigate('/login')
-    }
-  }, [auth])
+
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sidebar auth={auth} />
