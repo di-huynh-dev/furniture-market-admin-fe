@@ -294,7 +294,6 @@ const CategoryManagement = () => {
         pagination
         subHeader
         subHeaderComponent={subHeaderComponentMemo}
-        selectableRows
         persistTableHead
       />
     </>

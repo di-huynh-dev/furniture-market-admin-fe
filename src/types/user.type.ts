@@ -7,6 +7,7 @@ export type UserType = {
   birthday: string
   status: boolean
   gender: string
+  active: boolean
   role: string
   emailConfirmed: boolean
 }
@@ -20,9 +21,10 @@ export type LoginData = {
 export type RegisterType = {
   email: string
   phone: string
-  birthday: string
+  birthday?: string
+  role: string
   password: string
-  confirmPassword: string
+  confirmPassword?: string
   fullName: string
   gender: string
 }
