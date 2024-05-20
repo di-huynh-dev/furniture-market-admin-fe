@@ -1,19 +1,19 @@
+import useAuthStore from '@/store/auth-store'
 import React from 'react'
-
+import toast from 'react-hot-toast'
+  
 interface ProtectedProps {
   children: React.ReactNode
   role: string
 }
 
 const ProtectedByRole = ({ children, role }: ProtectedProps) => {
-  const [localStorageRole] = React.useState(() => localStorage.getItem('role') || '')
-
-  const isMatchRole = () => {
-    const roles = localStorageRole.split(',').map((role) => role.trim())
-    return roles.includes(role)
+  const auth = useAuthStore((state) => state.admin_auth)
+  if (auth.user.role !== role && auth.user.role !== 'ADMIN') {
+    toast.error('Bạn không có quyền truy cập vào mục này')
+    return null
   }
-
-  return isMatchRole() ? <>{children}</> : null
+  return <>{children}</>
 }
 
 export default ProtectedByRole

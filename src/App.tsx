@@ -2,19 +2,21 @@ import {
   CategoryMangament,
   ChatCenter,
   Dashboard,
-  FinancialManagement,
   ForgotPassword,
   Login,
+  OrderManagement,
   ProductReportManagement,
   ReturnOrderManagement,
   RoleManagement,
   ShopReportManagement,
   StatisticManagement,
   SystemUsersManagement,
+  TransactionManagement,
 } from './pages'
 import { admin_routes, common_routes } from './constants/router-links'
 import HomeLayout from './pages/HomeLayout'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
+import ProtectedByRole from './components/shared/ProtectedByRole'
 
 function App() {
   const router = createBrowserRouter([
@@ -32,23 +34,51 @@ function App() {
       children: [
         {
           index: true,
-          element: <Dashboard />,
+          element: (
+            <ProtectedByRole role="ADMIN">
+              <Dashboard />
+            </ProtectedByRole>
+          ),
         },
         {
           path: admin_routes.category,
-          element: <CategoryMangament />,
+          element: (
+            <ProtectedByRole role="ADMIN">
+              <CategoryMangament />
+            </ProtectedByRole>
+          ),
+        },
+        {
+          path: admin_routes.order,
+          element: (
+            <ProtectedByRole role="ADMIN">
+              <OrderManagement />
+            </ProtectedByRole>
+          ),
         },
         {
           path: admin_routes.users,
-          element: <SystemUsersManagement />,
+          element: (
+            <ProtectedByRole role="ADMIN">
+              <SystemUsersManagement />
+            </ProtectedByRole>
+          ),
         },
         {
           path: admin_routes.roles,
-          element: <RoleManagement />,
+          element: (
+            <ProtectedByRole role="ADMIN">
+              <RoleManagement />
+            </ProtectedByRole>
+          ),
         },
         {
-          path: admin_routes.financial,
-          element: <FinancialManagement />,
+          path: admin_routes.transaction,
+          element: (
+            <ProtectedByRole role="ADMIN">
+              <TransactionManagement />
+            </ProtectedByRole>
+          ),
         },
         {
           path: admin_routes.report_shops,
@@ -59,16 +89,16 @@ function App() {
           element: <ProductReportManagement />,
         },
         {
-          path: admin_routes.financial,
-          element: <FinancialManagement />,
-        },
-        {
           path: admin_routes.return_orders,
           element: <ReturnOrderManagement />,
         },
         {
           path: admin_routes.chat,
-          element: <ChatCenter />,
+          element: (
+            <ProtectedByRole role="ADMIN_CS">
+              <ChatCenter />
+            </ProtectedByRole>
+          ),
         },
         {
           path: admin_routes.statictis,

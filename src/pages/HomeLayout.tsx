@@ -7,7 +7,7 @@ import useAuthStore from '@/store/auth-store'
 const { Content, Footer } = Layout
 
 const HomeLayout: React.FC = () => {
-  const { auth } = useAuthStore()
+  const auth = useAuthStore((state) => state.admin_auth)
 
   return (
     <Layout style={{ minHeight: '100vh' }}>

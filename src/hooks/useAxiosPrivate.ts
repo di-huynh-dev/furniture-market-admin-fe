@@ -5,7 +5,7 @@ import useAuthStore from '@/store/auth-store'
 
 const useAxiosPrivate = () => {
   const refresh = useRefreshToken()
-  const { auth } = useAuthStore()
+  const auth = useAuthStore((state) => state.admin_auth)
 
   useEffect(() => {
     const requestIntercept = axiosPrivate.interceptors.request.use(

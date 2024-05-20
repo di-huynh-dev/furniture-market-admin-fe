@@ -4,7 +4,7 @@ import { createSelectors } from './create-selectors'
 import { devtools, persist } from 'zustand/middleware'
 
 type AuthStoreType = {
-  auth: LoginData
+  admin_auth: LoginData
   addAuth: (data: LoginData) => void
   removeAuth: () => void
 }
@@ -13,7 +13,7 @@ const useAuthStore = create<AuthStoreType>()(
   devtools(
     persist(
       (set) => ({
-        auth: {
+        admin_auth: {
           accessToken: '',
           user: {
             id: '',
@@ -25,14 +25,15 @@ const useAuthStore = create<AuthStoreType>()(
             status: false,
             gender: '',
             role: '',
+            active: false,
             emailConfirmed: false,
           },
           refreshToken: '',
         },
-        addAuth: (loginData) => set({ auth: loginData }),
+        addAuth: (loginData) => set({ admin_auth: loginData }),
         removeAuth: () =>
           set({
-            auth: {
+            admin_auth: {
               accessToken: '',
               user: {
                 id: '',
@@ -41,6 +42,7 @@ const useAuthStore = create<AuthStoreType>()(
                 phone: '',
                 avatar: '',
                 birthday: '',
+                active: false,
                 status: false,
                 gender: '',
                 role: '',

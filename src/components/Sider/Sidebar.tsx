@@ -53,7 +53,7 @@ const Sidebar = ({ auth }: { auth: LoginData }) => {
       getItem('Hệ thống', '3', <User className="w-5 h-5" />),
       getItem('Quản trị', '4', <ShieldPlus className="w-5 h-5" />),
     ]),
-    getItem('Tài chính', 'sub2', <BadgeDollarSign />),
+    getItem('Giao dịch', 'sub2', <BadgeDollarSign />),
     getItem('Doanh thu', '5', <HandCoins className="w-5 h-5" />),
     getItem('Báo cáo', 'sub3', <MessageSquareWarning className="w-5 h-5" />, [
       getItem('Sản phẩm', '6', <Armchair className="w-5 h-5" />),
@@ -79,7 +79,7 @@ const Sidebar = ({ auth }: { auth: LoginData }) => {
         navigate(admin_routes.roles)
         break
       case '5':
-        navigate(admin_routes.statictis)
+        navigate(admin_routes.transaction)
         break
       case '6':
         navigate(admin_routes.report_products)

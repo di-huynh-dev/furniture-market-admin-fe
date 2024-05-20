@@ -18,7 +18,11 @@ const SystemUsersManagement = () => {
   const [currentUser, setCurrentUser] = useState<UserType | null>(null)
   const [filterText, setFilterText] = useState('')
 
-  const { data: userList, isLoading } = useQuery({
+  const {
+    data: userList,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: [query_keys.USER_LIST],
     queryFn: async () => {
       const resp = await axiosPrivate.get('/admin/user')
@@ -137,6 +141,7 @@ const SystemUsersManagement = () => {
   ]
 
   if (isLoading) return <div>Loading</div>
+  if (isError) return <div>Lỗi </div>
   return (
     <div>
       <Drawer onClose={() => setIsViewModalOpen(false)} open={isViewModalOpen}>
