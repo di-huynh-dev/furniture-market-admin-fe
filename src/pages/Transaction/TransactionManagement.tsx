@@ -3,13 +3,10 @@ import useAxiosPrivate from '@/hooks/useAxiosPrivate'
 import { TransactionType } from '@/types/transaction.type'
 import { formatPrice } from '@/utils/helpers'
 import { useQuery } from '@tanstack/react-query'
-import { useState } from 'react'
 import DataTable, { TableColumn } from 'react-data-table-component'
 
 const TransactionManagement = () => {
   const axiosPrivate = useAxiosPrivate()
-  const [isViewModalOpen, setIsViewModalOpen] = useState(false)
-  const [currentReport, setCurrentReport] = useState<TransactionType | null>(null)
 
   const { data: transactions, isLoading } = useQuery({
     queryKey: [query_keys.TRANSACTION],
@@ -18,7 +15,6 @@ const TransactionManagement = () => {
       return resp.data.data
     },
   })
-  console.log('reportedProducts', transactions)
 
   const columns: TableColumn<TransactionType>[] = [
     {
@@ -42,8 +38,8 @@ const TransactionManagement = () => {
       cell: (row) => formatPrice(row.value),
     },
     {
-      name: 'Thao tác',
-      cell: (row) => <></>,
+      name: 'Thời gian',
+      cell: (row) => row.createdAt,
     },
   ]
   if (isLoading) {
@@ -52,7 +48,6 @@ const TransactionManagement = () => {
 
   return (
     <div>
-      {' '}
       <div className="card shadow-lg my-2 bg-white">
         <div className="card-body">
           <DataTable title="Danh sách lịch sử giao dịch hệ thống" columns={columns} data={transactions} pagination />

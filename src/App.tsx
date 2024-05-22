@@ -12,11 +12,13 @@ import {
   StatisticManagement,
   SystemUsersManagement,
   TransactionManagement,
+  WithdrawManagement,
 } from './pages'
 import { admin_routes, common_routes } from './constants/router-links'
 import HomeLayout from './pages/HomeLayout'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import ProtectedByRole from './components/shared/ProtectedByRole'
+import Protected from './components/shared/Protected'
 
 function App() {
   const router = createBrowserRouter([
@@ -30,7 +32,11 @@ function App() {
     },
     {
       path: '/',
-      element: <HomeLayout />,
+      element: (
+        <Protected>
+          <HomeLayout />
+        </Protected>
+      ),
       children: [
         {
           index: true,
@@ -77,6 +83,14 @@ function App() {
           element: (
             <ProtectedByRole role="ADMIN">
               <TransactionManagement />
+            </ProtectedByRole>
+          ),
+        },
+        {
+          path: admin_routes.withdraw,
+          element: (
+            <ProtectedByRole role="ADMIN">
+              <WithdrawManagement />
             </ProtectedByRole>
           ),
         },

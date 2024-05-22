@@ -11,6 +11,8 @@ import {
   ShoppingCart,
   HandCoins,
   BadgeDollarSign,
+  Undo2,
+  ArrowLeftRight,
 } from 'lucide-react'
 import type { MenuProps } from 'antd'
 import { Layout, Menu } from 'antd'
@@ -53,15 +55,17 @@ const Sidebar = ({ auth }: { auth: LoginData }) => {
       getItem('Hệ thống', '3', <User className="w-5 h-5" />),
       getItem('Quản trị', '4', <ShieldPlus className="w-5 h-5" />),
     ]),
-    getItem('Giao dịch', 'sub2', <BadgeDollarSign />),
-    getItem('Doanh thu', '5', <HandCoins className="w-5 h-5" />),
-    getItem('Báo cáo', 'sub3', <MessageSquareWarning className="w-5 h-5" />, [
-      getItem('Sản phẩm', '6', <Armchair className="w-5 h-5" />),
-
-      getItem('Shop', '7', <Store className="w-5 h-5" />),
+    getItem('Giao dịch', 'sub2', <BadgeDollarSign />, [
+      getItem('Hệ thống', '5', <ArrowLeftRight className="w-5 h-5" />),
+      getItem('Yêu cầu rút', '6', <Undo2 className="w-5 h-5" />),
     ]),
-    getItem('Đơn hoàn', '8', <ShoppingCart className="w-5 h-5" />),
-    getItem('Chat', '9', <HeartHandshake className="w-5 h-5" />),
+
+    getItem('Báo cáo', 'sub3', <MessageSquareWarning className="w-5 h-5" />, [
+      getItem('Sản phẩm', '7', <Armchair className="w-5 h-5" />),
+      getItem('Shop', '8', <Store className="w-5 h-5" />),
+    ]),
+    getItem('Đơn hoàn', '9', <ShoppingCart className="w-5 h-5" />),
+    getItem('Chat', '10', <HeartHandshake className="w-5 h-5" />),
   ]
 
   const handleNavigate = (key: React.Key) => {
@@ -82,15 +86,18 @@ const Sidebar = ({ auth }: { auth: LoginData }) => {
         navigate(admin_routes.transaction)
         break
       case '6':
-        navigate(admin_routes.report_products)
+        navigate(admin_routes.withdraw)
         break
       case '7':
-        navigate(admin_routes.report_shops)
+        navigate(admin_routes.report_products)
         break
       case '8':
-        navigate(admin_routes.return_orders)
+        navigate(admin_routes.report_shops)
         break
       case '9':
+        navigate(admin_routes.return_orders)
+        break
+      case '10':
         navigate(admin_routes.chat)
         break
       default:

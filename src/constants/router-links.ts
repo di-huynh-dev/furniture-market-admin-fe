@@ -15,6 +15,7 @@ export const admin_routes = {
   report_shops: '/report-shops',
   marketing: '/marketing',
   transaction: '/transaction',
+  withdraw: '/withdraw',
   statictis: '/statictis',
   chat: '/chat',
   order: '/orders',

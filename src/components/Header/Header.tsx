@@ -5,8 +5,13 @@ const { Header } = Layout
 import { Avatar, Space, Dropdown, Input } from 'antd'
 import type { MenuProps } from 'antd'
 import { LogOut, Settings, User, Bell, Search } from 'lucide-react'
+import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
+
 const HeaderComponent = ({ auth }: { auth: LoginData }) => {
   const removeAuth = useAuthStoreSelectors.use.removeAuth()
+  const navigate = useNavigate()
+
   const items: MenuProps['items'] = [
     {
       key: '1',
@@ -28,7 +33,17 @@ const HeaderComponent = ({ auth }: { auth: LoginData }) => {
     },
     {
       key: '3',
-      label: <button onClick={removeAuth}>Đăng xuất</button>,
+      label: (
+        <button
+          onClick={() => {
+            removeAuth()
+            navigate('/login')
+            toast.success('Đăng xuất thành công!')
+          }}
+        >
+          Đăng xuất
+        </button>
+      ),
       icon: <LogOut className="w-5 h-5" />,
     },
   ]
