@@ -102,7 +102,7 @@ const WithdrawManagement = () => {
     <div>
       <div className="card shadow-lg my-2 bg-white">
         <div className="card-body">
-          <DataTable title="Danh sách lịch sử giao dịch hệ thống" columns={columns} data={transactions} pagination />
+          <DataTable title="Danh sách yêu cầu rút tiền" columns={columns} data={transactions} pagination />
         </div>
       </div>
     </div>

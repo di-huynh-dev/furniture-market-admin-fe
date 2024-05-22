@@ -13,6 +13,8 @@ import {
   BadgeDollarSign,
   Undo2,
   ArrowLeftRight,
+  ListOrdered,
+  Undo,
 } from 'lucide-react'
 import type { MenuProps } from 'antd'
 import { Layout, Menu } from 'antd'
@@ -64,8 +66,11 @@ const Sidebar = ({ auth }: { auth: LoginData }) => {
       getItem('Sản phẩm', '7', <Armchair className="w-5 h-5" />),
       getItem('Shop', '8', <Store className="w-5 h-5" />),
     ]),
-    getItem('Đơn hoàn', '9', <ShoppingCart className="w-5 h-5" />),
-    getItem('Chat', '10', <HeartHandshake className="w-5 h-5" />),
+    getItem('Đơn hàng', 'sub4', <ShoppingCart className="w-5 h-5" />, [
+      getItem('Hệ thống', '9', <ListOrdered className="w-5 h-5" />),
+      getItem('Đơn hoàn', '10', <Undo className="w-5 h-5" />),
+    ]),
+    getItem('Chat', '11', <HeartHandshake className="w-5 h-5" />),
   ]
 
   const handleNavigate = (key: React.Key) => {
@@ -95,9 +100,12 @@ const Sidebar = ({ auth }: { auth: LoginData }) => {
         navigate(admin_routes.report_shops)
         break
       case '9':
-        navigate(admin_routes.return_orders)
+        navigate(admin_routes.order)
         break
       case '10':
+        navigate(admin_routes.return_orders)
+        break
+      case '11':
         navigate(admin_routes.chat)
         break
       default:

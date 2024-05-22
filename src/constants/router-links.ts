@@ -9,7 +9,6 @@ export const admin_routes = {
   roles: '/roles',
   settings: '/settings',
   category: '/system-category',
-  return_orders: '/return-orders',
   shops: '/shops',
   report_products: '/report-products',
   report_shops: '/report-shops',
@@ -19,4 +18,5 @@ export const admin_routes = {
   statictis: '/statictis',
   chat: '/chat',
   order: '/orders',
+  return_orders: '/return-orders',
 }
