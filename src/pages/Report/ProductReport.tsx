@@ -98,11 +98,7 @@ const ProductReport = () => {
     {
       name: 'Giải trình',
       cell: (row) =>
-        row.explanations.length > 0 ? (
-          <Tag color="#ff9100">Đã giải trình</Tag>
-        ) : (
-          <Tag color="#f90909">Chưa giải trình</Tag>
-        ),
+        row.explanations.length > 0 ? <Tag color="blue">Đã giải trình</Tag> : <Tag color="red">Chưa giải trình</Tag>,
     },
     {
       name: 'Thao tác',

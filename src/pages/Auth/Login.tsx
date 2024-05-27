@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { FormProps } from 'antd'
 import { Button, Form, Input } from 'antd'
-import logo from '@/assets/logo/Logo1.png'
+import logo from '@/assets/system.jpg'
 import background from '@/assets/system.jpg'
 import { useNavigate } from 'react-router-dom'
 import { useAuthStoreSelectors } from '@/store/auth-store'

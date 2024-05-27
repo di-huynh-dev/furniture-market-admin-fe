@@ -71,7 +71,7 @@ const SystemUsersManagement = () => {
   const columns: TableColumn<UserType>[] = [
     {
       name: 'ID',
-      selector: (row) => row.id,
+      cell: (row) => row.id,
     },
     {
       name: 'Tên người dùng',
@@ -101,17 +101,7 @@ const SystemUsersManagement = () => {
     },
     {
       name: 'Trạng thái',
-      cell: (row) =>
-        row.active ? (
-          <Tag color="#87d068">Đang hoạt động</Tag>
-        ) : (
-          <Tag
-            color="#f50
-      "
-          >
-            Tạm dừng hoạt động
-          </Tag>
-        ),
+      cell: (row) => (row.active ? <Tag color="green">Đang hoạt động</Tag> : <Tag color="red">Tạm dừng hoạt động</Tag>),
     },
     {
       name: 'Vai trò',

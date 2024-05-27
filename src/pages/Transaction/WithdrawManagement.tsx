@@ -67,7 +67,7 @@ const WithdrawManagement = () => {
     {
       name: 'Trạng thái',
       cell: (row) =>
-        row.status === 'PROCESSING' ? <Tag color="#f59d07">Đang xử lý</Tag> : <Tag color="#87d068">Đã xử lý</Tag>,
+        row.status === 'PROCESSING' ? <Tag color="blue">Đang xử lý</Tag> : <Tag color="green">Đã xử lý</Tag>,
     },
 
     {

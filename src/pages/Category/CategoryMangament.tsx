@@ -94,7 +94,7 @@ const CategoryManagement = () => {
     },
     {
       name: 'Thumbnail',
-      cell: (row) => <img src={row.image} alt={row.name} className="w-20 my-2" />,
+      cell: (row) => <img src={row.image} alt={row.name} className="w-20 h-16 my-2" />,
     },
     {
       name: 'Tên danh mục',
@@ -242,7 +242,11 @@ const CategoryManagement = () => {
           </p>
           <p>
             <strong>Thumbnail:</strong>{' '}
-            <img src={currentCategory?.image} alt={currentCategory?.name} className="w-20 my-2" />
+            <img
+              src={currentCategory?.image}
+              alt={currentCategory?.name}
+              className="w-200 max-h-200 object-cover my-2"
+            />
           </p>
         </div>
       </Modal>

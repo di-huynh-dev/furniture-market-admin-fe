@@ -9,7 +9,6 @@ import {
   Armchair,
   Store,
   ShoppingCart,
-  HandCoins,
   BadgeDollarSign,
   Undo2,
   ArrowLeftRight,

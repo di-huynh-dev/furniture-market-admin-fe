@@ -6,4 +6,5 @@ export const query_keys = {
   TRANSACTION: 'TRANSACTION',
   ORDER_LIST: 'ORDER_LIST',
   WITHDRAW: 'WITHDRAW',
+  STATISTIC: 'STATISTIC',
 }
