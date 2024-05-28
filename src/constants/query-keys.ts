@@ -7,4 +7,5 @@ export const query_keys = {
   ORDER_LIST: 'ORDER_LIST',
   WITHDRAW: 'WITHDRAW',
   STATISTIC: 'STATISTIC',
+  REFUND_ORDER: 'REFUND_ORDER',
 }

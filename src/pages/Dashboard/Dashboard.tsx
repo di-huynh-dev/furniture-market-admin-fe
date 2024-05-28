@@ -70,11 +70,10 @@ const Dashboard = () => {
 
   return (
     <div>
-      <div></div>
       <div className="pb-5 lg:text-lg text-sm">
         <div className="grid md:grid-cols-2">
           <div>
-            <div className="font-bold capitalize">Tổng quan shop</div>
+            <div className="font-bold capitalize">Tổng quan hệ thống</div>
           </div>
           <div className="flex gap-2">
             <Select

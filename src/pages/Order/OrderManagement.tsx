@@ -84,7 +84,7 @@ const OrderManagement = () => {
             okText="Yes"
             cancelText="No"
           >
-            <Button>Thay đôi trạng thái</Button>
+            <Button>Cập nhật trạng thái</Button>
           </Popconfirm>
         </div>
       ),
