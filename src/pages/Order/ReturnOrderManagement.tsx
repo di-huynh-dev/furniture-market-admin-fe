@@ -27,6 +27,7 @@ const ReturnOrderManagement = () => {
       return resp.data.data
     },
   })
+  console.log(data)
 
   const handleAccessRefund = async (id: string, status: boolean) => {
     try {
@@ -46,7 +47,7 @@ const ReturnOrderManagement = () => {
   }
 
   const columns: TableColumn<ReturnOrderType>[] = [
-    { name: 'ID', cell: (row) => row.id },
+    { name: 'ID', selector: (row) => row.id },
     { name: 'Nội dung giải trình', cell: (row) => row.reason },
     {
       name: 'Mã đơn hàng',
@@ -57,16 +58,24 @@ const ReturnOrderManagement = () => {
       cell: (row) => <Tag color={row.done ? 'green' : 'red'}>{row.done ? 'Đã xử lý' : 'Chưa xử lý'}</Tag>,
     },
     {
+      name: 'Chấp nhận ',
+      cell: (row) => (
+        <Tag color={row.orderRefundResponse.accepted ? 'green' : 'red'}>
+          {row.orderRefundResponse.accepted ? 'Đồng ý' : 'Từ chối'}
+        </Tag>
+      ),
+    },
+    {
       name: 'Action',
       cell: (row) => (
-        <div className="flex gap-2 items-center text-gray-500">
+        <div className="flex gap-1 items-center text-gray-500">
           <button className="btn btn-primary" onClick={() => showUserDetails(row)}>
             <AiOutlineEye className="w-5 h-5" />
           </button>
           <Popconfirm
             title="Xác nhận đồng ý hoàn tiền đơn hàng?"
             description="Bạn chắc chắn đồng ý hoàn tiền đơn hàng này?"
-            onConfirm={() => handleAccessRefund(row.id, true)}
+            onConfirm={() => handleAccessRefund(row.orderRefundResponse.id, true)}
             okText="Yes"
             cancelText="No"
           >
@@ -75,7 +84,7 @@ const ReturnOrderManagement = () => {
           <Popconfirm
             title="Xác nhận từ chối hoàn tiền đơn hàng?"
             description="Bạn chắc chắn từ chối hoàn tiền đơn hàngnày?"
-            onConfirm={() => handleAccessRefund(row.id, false)}
+            onConfirm={() => handleAccessRefund(row.orderRefundResponse.id, false)}
             okText="Yes"
             cancelText="No"
           >

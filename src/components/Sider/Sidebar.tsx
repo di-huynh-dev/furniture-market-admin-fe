@@ -4,7 +4,6 @@ import {
   Users,
   User,
   ShieldPlus,
-  HeartHandshake,
   MessageSquareWarning,
   Armchair,
   Store,
@@ -69,7 +68,6 @@ const Sidebar = ({ auth }: { auth: LoginData }) => {
       getItem('Hệ thống', '9', <ListOrdered className="w-5 h-5" />),
       getItem('Đơn hoàn', '10', <Undo className="w-5 h-5" />),
     ]),
-    getItem('Chat', '11', <HeartHandshake className="w-5 h-5" />),
   ]
 
   const handleNavigate = (key: React.Key) => {
@@ -103,9 +101,6 @@ const Sidebar = ({ auth }: { auth: LoginData }) => {
         break
       case '10':
         navigate(admin_routes.return_orders)
-        break
-      case '11':
-        navigate(admin_routes.chat)
         break
       default:
         break

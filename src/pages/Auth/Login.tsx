@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { FormProps } from 'antd'
 import { Button, Form, Input } from 'antd'
-import logo from '@/assets/system.jpg'
 import background from '@/assets/system.jpg'
 import { useNavigate } from 'react-router-dom'
 import { useAuthStoreSelectors } from '@/store/auth-store'
@@ -43,9 +42,6 @@ const Login = () => {
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 ">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <div className="">
-                <div className="flex justify-center">
-                  <img src={logo} alt="" className="w-32" />
-                </div>
                 <p className="text-lg font-bold text-center">HỆ THỐNG QUẢN LÝ FNEST</p>
               </div>
               <Form
@@ -61,7 +57,7 @@ const Login = () => {
                   label="Email"
                   name="username"
                   className="dark:text-white"
-                  rules={[{ required: true, message: 'Please input your username!' }]}
+                  rules={[{ required: true, message: 'Please input your email!' }]}
                 >
                   <Input placeholder="nguyenvana@gmail.comx" />
                 </Form.Item>

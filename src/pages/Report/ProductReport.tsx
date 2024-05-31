@@ -17,12 +17,14 @@ const ProductReport = () => {
   const [currentReport, setCurrentReport] = useState<ReportedType | null>(null)
 
   const { data: reportedProducts, isLoading } = useQuery({
-    queryKey: [query_keys.REPORTED_PRODUCT_LIST],
+    queryKey: [query_keys.REPORTED_PRODUCT_LIST, 'product'],
     queryFn: async () => {
       const resp = await axiosPrivate.get('/admin/report')
       return resp.data.data
     },
   })
+  const filteredProducts = reportedProducts?.filter((product: ReportedType) => product.type === 'PRODUCT_REPORT')
+  console.log(filteredProducts)
 
   const showReportDetails = (report: ReportedType) => {
     setCurrentReport(report)
@@ -34,19 +36,19 @@ const ProductReport = () => {
       const resp = await axiosPrivate.put(`/admin/report/status/${selectedRow}`, { status })
       if (resp.status === 200) {
         toast.success(resp.data.messages[0])
-        client.invalidateQueries({ queryKey: [query_keys.REPORTED_PRODUCT_LIST] })
+        client.invalidateQueries({ queryKey: [query_keys.REPORTED_PRODUCT_LIST, 'product'] })
       }
     } catch (error: any) {
       toast.error(error.response.data.messages[0])
     }
   }
 
-  const handleAcceptExplain = async (id: string) => {
+  const handleAcceptExplain = async (id: string, status: string) => {
     try {
-      const resp = await axiosPrivate.put(`/admin/report/explanation/${id}`)
+      const resp = await axiosPrivate.put(`/admin/report/status/${id}`, { status })
       if (resp.status === 200) {
         toast.success(resp.data.messages[0])
-        client.invalidateQueries({ queryKey: [query_keys.REPORTED_PRODUCT_LIST] })
+        client.invalidateQueries({ queryKey: [query_keys.REPORTED_PRODUCT_LIST, 'product'] })
       }
     } catch (error: any) {
       toast.error(error.response.data.messages[0])
@@ -55,10 +57,15 @@ const ProductReport = () => {
 
   const columns: TableColumn<ReportedType>[] = [
     {
-      name: 'Tên sản phẩm',
-      selector: (row) => row.objectInfo.name,
+      name: 'Thông tin sản phẩm',
+      cell: (row) => (
+        <div>
+          <p>ID: {row.objectInfo.id}</p>
+          <p>Tên sản phẩm: {row.objectInfo.name}</p>
+          <img src={row.objectInfo.thumbnail} alt="" className="w-10 h-10 object-cover gap-2" />
+        </div>
+      ),
       sortable: true,
-      wrap: true,
     },
     {
       name: 'Lý do',
@@ -79,7 +86,7 @@ const ProductReport = () => {
               ? 'warning'
               : row.status === 'PROCESSING'
               ? 'processing'
-              : row.status === 'DONE'
+              : row.status === 'UNACCEPTED'
               ? 'success'
               : 'error'
           }
@@ -88,9 +95,9 @@ const ProductReport = () => {
               ? 'Chưa xử lý'
               : row.status === 'PROCESSING'
               ? 'Đang xử lý'
-              : row.status === 'DONE'
-              ? 'Đã xử lý'
-              : 'Từ chối'
+              : row.status === 'UNACCEPTED'
+              ? 'Không vi phạm'
+              : 'Vi phạm'
           }
         />
       ),
@@ -131,7 +138,8 @@ const ProductReport = () => {
       <Drawer onClose={() => setIsViewModalOpen(false)} open={isViewModalOpen}>
         {currentReport && (
           <div className="space-y-4">
-            <p className="font-bold text-center text-lg">Thông tin báo cáo vi phạm sản phẩm</p>
+            <p className="font-bold text-center text-lg">Thông tin báo cáo sản phẩm vi phạm </p>
+            <p>ID sản phẩm: {currentReport.objectInfo.id}</p>
             <p>Tên sản phẩm: {currentReport.objectInfo.name}</p>
             <p>Lý do: {currentReport.reason}</p>
             <p>Mô tả thêm: {currentReport.description}</p>
@@ -153,9 +161,7 @@ const ProductReport = () => {
               <div className="flex gap-2 my-2">
                 <Button
                   onClick={() => {
-                    handleAcceptExplain(currentReport.explanations[0].id)
-                    setSelectedRow(currentReport.id)
-                    handleRequestExecute('DONE')
+                    handleAcceptExplain(currentReport.id, 'UNACCEPTED')
                   }}
                   type="primary"
                 >
@@ -163,8 +169,7 @@ const ProductReport = () => {
                 </Button>
                 <Button
                   onClick={() => {
-                    setSelectedRow(currentReport.id)
-                    handleRequestExecute('DONE')
+                    handleAcceptExplain(currentReport.id, 'ACCEPTED')
                   }}
                 >
                   Từ chối
@@ -176,7 +181,12 @@ const ProductReport = () => {
       </Drawer>
       <div className="card shadow-lg my-2 bg-white">
         <div className="card-body">
-          <DataTable title="Danh sách sản phẩm vi phạm" columns={columns} data={reportedProducts} pagination />
+          <DataTable
+            title="Danh sách báo cáo các sản phẩm vi phạm"
+            columns={columns}
+            data={filteredProducts}
+            pagination
+          />
         </div>
       </div>
     </div>

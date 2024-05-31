@@ -17,6 +17,8 @@ export type ReportedType = {
     id: string
     name: string
     thumbnail: string
+    logo: string
+    storeName: string
   }
   updatedAt: string
 }
