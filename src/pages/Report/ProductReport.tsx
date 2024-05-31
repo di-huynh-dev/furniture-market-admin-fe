@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import LoadingComponent from '@/components/Loading/LoadingComponent'
 import { query_keys } from '@/constants/query-keys'
 import useAxiosPrivate from '@/hooks/useAxiosPrivate'
 import { ReportedType } from '@/types/reported.type'
@@ -130,7 +131,7 @@ const ProductReport = () => {
     },
   ]
   if (isLoading) {
-    return <div>Loading...</div>
+    return <LoadingComponent />
   }
   return (
     <div>

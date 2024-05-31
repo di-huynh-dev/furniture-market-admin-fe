@@ -1,16 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import LoadingComponent from '@/components/Loading/LoadingComponent'
 import { query_keys } from '@/constants/query-keys'
 import useAxiosPrivate from '@/hooks/useAxiosPrivate'
 import { OrderItem, ResponseItem } from '@/types/order.type'
 import { formatPrice } from '@/utils/helpers'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { Button, Popconfirm, Tag } from 'antd'
+import { Button, Popconfirm, Tag, Tabs } from 'antd'
 import DataTable, { TableColumn } from 'react-data-table-component'
 import toast from 'react-hot-toast'
+import { useState } from 'react'
 
 const OrderManagement = () => {
   const axiosPrivate = useAxiosPrivate()
   const queryClient = useQueryClient()
+  const [activeTab, setActiveTab] = useState('TO_SHIP')
 
   const { data: orders, isLoading } = useQuery({
     queryKey: [query_keys.ORDER_LIST],
@@ -54,7 +57,7 @@ const OrderManagement = () => {
       cell: (row) => (
         <div>
           {row.responses.map((item: ResponseItem) => (
-            <p>{item.productName}</p>
+            <p key={item.productId}>{item.productName}</p>
           ))}
         </div>
       ),
@@ -91,13 +94,35 @@ const OrderManagement = () => {
     },
   ]
 
-  if (isLoading) return <div>Loading...</div>
+  const filteredOrders = orders?.filter((order: OrderItem) => order.status === activeTab)
+
+  if (isLoading) return <LoadingComponent />
 
   return (
     <div>
       <div className="card shadow-lg my-2 bg-white">
         <div className="card-body">
-          <DataTable title="Danh sách đơn hàng hệ thống" columns={columns} data={orders} pagination />
+          <div className="px-2">
+            <Tabs defaultActiveKey="TO_SHIP" onChange={(key) => setActiveTab(key)}>
+              <Tabs.TabPane tab="Chờ vận chuyển" key="TO_SHIP">
+                <DataTable
+                  title="Danh sách đơn hàng chờ vận chuyển"
+                  columns={columns}
+                  data={filteredOrders}
+                  pagination
+                />
+              </Tabs.TabPane>
+              <Tabs.TabPane tab="Đang giao" key="SHIPPING">
+                <DataTable title="Danh sách đơn hàng đang giao" columns={columns} data={filteredOrders} pagination />
+              </Tabs.TabPane>
+              <Tabs.TabPane tab="Đã giao" key="COMPLETED">
+                <DataTable title="Danh sách đơn hàng đã giao" columns={columns} data={filteredOrders} pagination />
+              </Tabs.TabPane>
+              <Tabs.TabPane tab="Đã hủy" key="CANCELLED">
+                <DataTable title="Danh sách đơn hàng đã hủy" columns={columns} data={filteredOrders} pagination />
+              </Tabs.TabPane>
+            </Tabs>
+          </div>
         </div>
       </div>
     </div>

@@ -14,3 +14,4 @@ export { default as TransactionManagement } from './Transaction/TransactionManag
 export { default as WithdrawManagement } from './Transaction/WithdrawManagement'
 export { default as OrderManagement } from './Order/OrderManagement'
 export { default as ReturnOrderManagement } from './Order/ReturnOrderManagement'
+export { default as MarketingManagement } from './Marketing/MarketingManagement'

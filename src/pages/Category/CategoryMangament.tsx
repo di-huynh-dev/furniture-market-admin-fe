@@ -11,6 +11,7 @@ import { UploadOutlined } from '@ant-design/icons'
 import type { UploadProps } from 'antd'
 import type { SearchProps } from 'antd/es/input/Search'
 import toast from 'react-hot-toast'
+import LoadingComponent from '@/components/Loading/LoadingComponent'
 const { Search } = Input
 
 const CategoryManagement = () => {
@@ -185,7 +186,7 @@ const CategoryManagement = () => {
     toast.error('Vui lòng điền đầy đủ các thông tin!')
   }
 
-  if (isLoading) return <div>Loading...</div>
+  if (isLoading) return <LoadingComponent />
   if (isError) return <div>Error loading categories</div>
 
   return (

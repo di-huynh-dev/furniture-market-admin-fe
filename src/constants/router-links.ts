@@ -12,7 +12,7 @@ export const admin_routes = {
   shops: '/shops',
   report_products: '/report-products',
   report_shops: '/report-shops',
-  marketing: '/marketing',
+  marketing: '/marketing-products',
   transaction: '/transaction',
   withdraw: '/withdraw',
   statictis: '/statictis',

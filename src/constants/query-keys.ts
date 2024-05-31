@@ -8,4 +8,5 @@ export const query_keys = {
   WITHDRAW: 'WITHDRAW',
   STATISTIC: 'STATISTIC',
   REFUND_ORDER: 'REFUND_ORDER',
+  MARKETING: 'MARKETING',
 }

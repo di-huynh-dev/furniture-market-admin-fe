@@ -4,6 +4,7 @@ import {
   Dashboard,
   ForgotPassword,
   Login,
+  MarketingManagement,
   OrderManagement,
   ProductReportManagement,
   ReturnOrderManagement,
@@ -117,6 +118,10 @@ function App() {
         {
           path: admin_routes.statictis,
           element: <StatisticManagement />,
+        },
+        {
+          path: admin_routes.marketing,
+          element: <MarketingManagement />,
         },
       ],
     },

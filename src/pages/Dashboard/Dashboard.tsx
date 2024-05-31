@@ -8,6 +8,7 @@ import { RiBillFill } from 'react-icons/ri'
 import { formatPrice } from '@/utils/helpers'
 import IncomeLineChart from './components/IncomeLineChart'
 import OrderBarChart from './components/OrderBarChart'
+import LoadingComponent from '@/components/Loading/LoadingComponent'
 
 const Dashboard = () => {
   const axiosPrivate = useAxiosPrivate()
@@ -28,10 +29,6 @@ const Dashboard = () => {
       return resp.data.data
     },
   })
-
-  console.log('====================================')
-  console.log(statistics)
-  console.log('====================================')
 
   const handleMonthChange = (value: string) => {
     setMonth(parseInt(value))
@@ -66,7 +63,7 @@ const Dashboard = () => {
     return Array.from({ length: 2 }, (_, i) => currentYear - i).map((y) => ({ value: y.toString(), label: `Năm ${y}` }))
   }
 
-  if (isLoading) return <div>Loading...</div>
+  if (isLoading) return <LoadingComponent />
 
   return (
     <div>

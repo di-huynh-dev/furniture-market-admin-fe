@@ -1,17 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import LoadingComponent from '@/components/Loading/LoadingComponent'
 import { query_keys } from '@/constants/query-keys'
 import useAxiosPrivate from '@/hooks/useAxiosPrivate'
 import { WithdrawType } from '@/types/transaction.type'
 import { formatPrice } from '@/utils/helpers'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { Popconfirm, Tag } from 'antd'
+import { Popconfirm, Tag, Tabs } from 'antd'
 import { CircleOff, SquareCheckBig } from 'lucide-react'
 import DataTable, { TableColumn } from 'react-data-table-component'
 import toast from 'react-hot-toast'
+import { useState } from 'react'
 
 const WithdrawManagement = () => {
   const axiosPrivate = useAxiosPrivate()
   const queryClient = useQueryClient()
+  const [activeTab, setActiveTab] = useState('PROCESSING')
 
   const { data: transactions, isLoading } = useQuery({
     queryKey: [query_keys.WITHDRAW],
@@ -21,11 +24,11 @@ const WithdrawManagement = () => {
     },
   })
 
+  console.log(transactions)
+
   const updateWithdrawStatus = async (id: string, status: string) => {
     try {
-      const resp = await axiosPrivate.put(`/admin/withdrawal/status/${id}`, {
-        status: status,
-      })
+      const resp = await axiosPrivate.put(`/admin/withdrawal/status/${id}`, { status })
       if (resp.status === 200) {
         toast.success(resp.data.messages[0])
         queryClient.invalidateQueries({ queryKey: [query_keys.WITHDRAW] })
@@ -34,6 +37,7 @@ const WithdrawManagement = () => {
       toast.error(error.response.data.messages[0])
     }
   }
+
   const columns: TableColumn<WithdrawType>[] = [
     {
       name: 'ID',
@@ -67,9 +71,14 @@ const WithdrawManagement = () => {
     {
       name: 'Trạng thái',
       cell: (row) =>
-        row.status === 'PROCESSING' ? <Tag color="blue">Đang xử lý</Tag> : <Tag color="green">Đã xử lý</Tag>,
+        row.status === 'PROCESSING' ? (
+          <Tag color="blue">Đang xử lý</Tag>
+        ) : row.status === 'FAIL' ? (
+          <Tag color="red">Thất bại</Tag>
+        ) : (
+          <Tag color="green">Đã xử lý</Tag>
+        ),
     },
-
     {
       name: 'Thao tác',
       cell: (row) => (
@@ -97,12 +106,42 @@ const WithdrawManagement = () => {
     },
   ]
 
-  if (isLoading) return <div>Loading...</div>
+  const filteredTransactions = transactions?.filter((transaction: WithdrawType) => transaction.status === activeTab)
+
+  if (isLoading) return <LoadingComponent />
+
   return (
     <div>
       <div className="card shadow-lg my-2 bg-white">
         <div className="card-body">
-          <DataTable title="Danh sách yêu cầu rút tiền" columns={columns} data={transactions} pagination />
+          <div className="px-2">
+            <Tabs defaultActiveKey="PROCESSING" onChange={(key) => setActiveTab(key)}>
+              <Tabs.TabPane tab="Chờ xử lý" key="PROCESSING">
+                <DataTable
+                  title="Danh sách yêu cầu rút tiền"
+                  columns={columns}
+                  data={filteredTransactions}
+                  pagination
+                />
+              </Tabs.TabPane>
+              <Tabs.TabPane tab="Đã xử lý" key="DONE">
+                <DataTable
+                  title="Danh sách yêu cầu rút tiền"
+                  columns={columns}
+                  data={filteredTransactions}
+                  pagination
+                />
+              </Tabs.TabPane>
+              <Tabs.TabPane tab="Thất bại" key="FAIL">
+                <DataTable
+                  title="Danh sách yêu cầu rút tiền"
+                  columns={columns}
+                  data={filteredTransactions}
+                  pagination
+                />
+              </Tabs.TabPane>
+            </Tabs>
+          </div>
         </div>
       </div>
     </div>

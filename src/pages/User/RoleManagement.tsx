@@ -11,6 +11,7 @@ import toast from 'react-hot-toast'
 import { useMemo, useState } from 'react'
 import Input, { SearchProps } from 'antd/es/input'
 import Search from 'antd/es/input/Search'
+import LoadingComponent from '@/components/Loading/LoadingComponent'
 
 const RoleManagement = () => {
   const axiosPrivate = useAxiosPrivate()
@@ -167,8 +168,7 @@ const RoleManagement = () => {
 
   const handleAddFinishFailed = () => {}
 
-  if (isLoading) return <div>Loading...</div>
-
+  if (isLoading) return <LoadingComponent />
   return (
     <div>
       <Modal

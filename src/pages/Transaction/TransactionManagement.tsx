@@ -1,3 +1,4 @@
+import LoadingComponent from '@/components/Loading/LoadingComponent'
 import { query_keys } from '@/constants/query-keys'
 import useAxiosPrivate from '@/hooks/useAxiosPrivate'
 import { TransactionType } from '@/types/transaction.type'
@@ -58,7 +59,7 @@ const TransactionManagement = () => {
     },
   ]
   if (isLoading) {
-    return <div>Loading...</div>
+    return <LoadingComponent />
   }
 
   return (

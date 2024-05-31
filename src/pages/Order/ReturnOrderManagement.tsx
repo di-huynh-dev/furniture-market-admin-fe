@@ -127,7 +127,7 @@ const ReturnOrderManagement = () => {
     },
   ]
   return (
-    <div>
+    <div className="card shadow-lg my-2 bg-white">
       <Drawer width={500} loading={isLoading} onClose={() => setIsViewModalOpen(false)} open={isViewModalOpen}>
         {currentRefundReport && (
           <>
@@ -178,7 +178,9 @@ const ReturnOrderManagement = () => {
         )}
       </Drawer>
 
-      <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
+      <div className="px-2">
+        <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
+      </div>
     </div>
   )
 }
