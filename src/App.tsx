@@ -1,6 +1,5 @@
 import {
   CategoryMangament,
-  ChatCenter,
   Dashboard,
   ForgotPassword,
   Login,
@@ -10,7 +9,6 @@ import {
   ReturnOrderManagement,
   RoleManagement,
   ShopReportManagement,
-  StatisticManagement,
   SystemUsersManagement,
   TransactionManagement,
   WithdrawManagement,
@@ -106,18 +104,6 @@ function App() {
         {
           path: admin_routes.return_orders,
           element: <ReturnOrderManagement />,
-        },
-        {
-          path: admin_routes.chat,
-          element: (
-            <ProtectedByRole role="ADMIN_CS">
-              <ChatCenter />
-            </ProtectedByRole>
-          ),
-        },
-        {
-          path: admin_routes.statictis,
-          element: <StatisticManagement />,
         },
         {
           path: admin_routes.marketing,

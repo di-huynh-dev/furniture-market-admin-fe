@@ -130,9 +130,7 @@ const ProductReport = () => {
       ),
     },
   ]
-  if (isLoading) {
-    return <LoadingComponent />
-  }
+
   return (
     <div>
       <Drawer onClose={() => setIsViewModalOpen(false)} open={isViewModalOpen}>
@@ -185,6 +183,8 @@ const ProductReport = () => {
             title="Danh sách báo cáo các sản phẩm vi phạm"
             columns={columns}
             data={filteredProducts}
+            progressPending={isLoading}
+            progressComponent={<LoadingComponent />}
             pagination
           />
         </div>

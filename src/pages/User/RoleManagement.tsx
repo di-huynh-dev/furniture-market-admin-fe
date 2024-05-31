@@ -168,7 +168,6 @@ const RoleManagement = () => {
 
   const handleAddFinishFailed = () => {}
 
-  if (isLoading) return <LoadingComponent />
   return (
     <div>
       <Modal
@@ -295,6 +294,8 @@ const RoleManagement = () => {
         title="Quản lý phân quyền admin hệ thống"
         columns={columns}
         data={filteredItems}
+        progressPending={isLoading}
+        progressComponent={<LoadingComponent />}
         subHeader
         subHeaderComponent={subHeaderComponentMemo}
         pagination

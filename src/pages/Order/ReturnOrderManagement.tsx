@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import LoadingComponent from '@/components/Loading/LoadingComponent'
 import { query_keys } from '@/constants/query-keys'
 import useAxiosPrivate from '@/hooks/useAxiosPrivate'
 import { ReturnOrderType } from '@/types/refund.type'
@@ -119,6 +120,7 @@ const ReturnOrderManagement = () => {
             title="Danh sách yêu cầu hoàn trả chưa xử lý"
             columns={columns}
             data={data}
+            progressComponent={<LoadingComponent />}
             pagination
             progressPending={isLoading}
           />

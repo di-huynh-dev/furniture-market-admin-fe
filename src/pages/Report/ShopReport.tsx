@@ -135,10 +135,6 @@ const ShopReport = () => {
     },
   ]
 
-  if (isLoading) {
-    return <LoadingComponent />
-  }
-
   return (
     <div>
       <Drawer onClose={() => setIsViewModalOpen(false)} open={isViewModalOpen}>
@@ -190,7 +186,14 @@ const ShopReport = () => {
       </Drawer>
       <div className="card shadow-lg my-2 bg-white">
         <div className="card-body">
-          <DataTable title="Danh sách báo cáo các shop vi phạm" columns={columns} data={filteredProducts} pagination />
+          <DataTable
+            title="Danh sách báo cáo các shop vi phạm"
+            columns={columns}
+            data={filteredProducts}
+            progressPending={isLoading}
+            progressComponent={<LoadingComponent />}
+            pagination
+          />
         </div>
       </div>
     </div>

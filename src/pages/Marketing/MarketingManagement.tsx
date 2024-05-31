@@ -1,3 +1,4 @@
+import LoadingComponent from '@/components/Loading/LoadingComponent'
 import { query_keys } from '@/constants/query-keys'
 import useAxiosPrivate from '@/hooks/useAxiosPrivate'
 import { MarketingType } from '@/types/marketing.type'
@@ -40,6 +41,7 @@ const MarketingManagement = () => {
       ),
     },
   ]
+
   return (
     <div>
       <div className="card shadow-lg my-2 bg-white">
@@ -48,6 +50,7 @@ const MarketingManagement = () => {
             title="Danh sản phẩm đăng ký Marketing"
             columns={columns}
             progressPending={isLoading}
+            progressComponent={<LoadingComponent />}
             data={data}
             pagination
           />

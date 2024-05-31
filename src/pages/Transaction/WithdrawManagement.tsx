@@ -108,8 +108,6 @@ const WithdrawManagement = () => {
 
   const filteredTransactions = transactions?.filter((transaction: WithdrawType) => transaction.status === activeTab)
 
-  if (isLoading) return <LoadingComponent />
-
   return (
     <div>
       <div className="card shadow-lg my-2 bg-white">
@@ -136,6 +134,8 @@ const WithdrawManagement = () => {
                 <DataTable
                   title="Danh sách yêu cầu rút tiền"
                   columns={columns}
+                  progressPending={isLoading}
+                  progressComponent={<LoadingComponent />}
                   data={filteredTransactions}
                   pagination
                 />

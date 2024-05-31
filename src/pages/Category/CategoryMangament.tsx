@@ -186,7 +186,6 @@ const CategoryManagement = () => {
     toast.error('Vui lòng điền đầy đủ các thông tin!')
   }
 
-  if (isLoading) return <LoadingComponent />
   if (isError) return <div>Error loading categories</div>
 
   return (
@@ -298,6 +297,8 @@ const CategoryManagement = () => {
         data={filteredItems}
         pagination
         subHeader
+        progressComponent={<LoadingComponent />}
+        progressPending={isLoading}
         subHeaderComponent={subHeaderComponentMemo}
         persistTableHead
       />

@@ -96,8 +96,6 @@ const OrderManagement = () => {
 
   const filteredOrders = orders?.filter((order: OrderItem) => order.status === activeTab)
 
-  if (isLoading) return <LoadingComponent />
-
   return (
     <div>
       <div className="card shadow-lg my-2 bg-white">
@@ -109,6 +107,8 @@ const OrderManagement = () => {
                   title="Danh sách đơn hàng chờ vận chuyển"
                   columns={columns}
                   data={filteredOrders}
+                  progressComponent={<LoadingComponent />}
+                  progressPending={isLoading}
                   pagination
                 />
               </Tabs.TabPane>

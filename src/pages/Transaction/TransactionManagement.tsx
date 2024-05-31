@@ -58,15 +58,19 @@ const TransactionManagement = () => {
       cell: (row) => row.createdAt,
     },
   ]
-  if (isLoading) {
-    return <LoadingComponent />
-  }
 
   return (
     <div>
       <div className="card shadow-lg my-2 bg-white">
         <div className="card-body">
-          <DataTable title="Danh sách lịch sử giao dịch hệ thống" columns={columns} data={transactions} pagination />
+          <DataTable
+            title="Danh sách lịch sử giao dịch hệ thống"
+            columns={columns}
+            data={transactions}
+            progressPending={isLoading}
+            progressComponent={<LoadingComponent />}
+            pagination
+          />
         </div>
       </div>
     </div>
