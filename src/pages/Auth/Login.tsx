@@ -26,7 +26,23 @@ const Login = () => {
       if (resp.status === 200) {
         addAuth(resp.data.data)
         toast.success('Đăng nhập thành công')
-        navigate('/')
+        switch (resp.data.data.user.role) {
+          case 'ADMIN':
+            navigate('/')
+            break
+          case 'ADMIN_ORDER':
+            navigate('/return-orders')
+            break
+          case 'ADMIN_REPORT':
+            navigate('/report-products')
+            break
+          case 'ADMIN_MARKETING':
+            navigate('/marketing-products')
+            break
+          default:
+            navigate('/')
+            break
+        }
       } else {
         toast.error('Đăng nhập thất bại')
       }

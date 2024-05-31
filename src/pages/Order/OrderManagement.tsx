@@ -48,7 +48,7 @@ const OrderManagement = () => {
   }
 
   const columns: TableColumn<OrderItem>[] = [
-    { name: 'Mã đơn', selector: (row) => row.id },
+    { name: 'Mã đơn', cell: (row) => row.id },
     {
       name: 'Danh sách sản phẩm',
       cell: (row) => (

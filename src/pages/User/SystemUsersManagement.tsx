@@ -83,7 +83,7 @@ const SystemUsersManagement = () => {
       ),
     },
     {
-      name: 'Email (Trạng thái)',
+      name: 'Email',
       cell: (row) => (
         <div className="flex items-center gap-2">
           <p>{row.email}</p>
@@ -97,7 +97,7 @@ const SystemUsersManagement = () => {
     },
     {
       name: 'Giới tính',
-      selector: (row) => row.gender,
+      selector: (row) => (row.gender !== 'MALE' ? 'Nữ' : 'Nam'),
     },
     {
       name: 'Trạng thái',
@@ -155,7 +155,7 @@ const SystemUsersManagement = () => {
             </div>
             <div className="grid grid-cols-2 gap-2 my-6">
               <p className="font-bold">Giới tính</p>
-              <p>{currentUser.gender}</p>
+              <p>{currentUser.gender === 'MALE' ? 'Nam' : 'Nữ'}</p>
             </div>
             <div className="grid grid-cols-2 gap-2 my-6">
               <p className="font-bold">Trạng thái</p>

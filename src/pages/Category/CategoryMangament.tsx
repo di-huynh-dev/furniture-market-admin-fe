@@ -155,7 +155,7 @@ const CategoryManagement = () => {
   }
 
   const handleAddFinishFailed = () => {
-    toast.error('Please fill out the form correctly')
+    toast.error('Vui lòng điền đầy đủ các thông tin!')
   }
 
   const handleEditFinish = async (values: { name: string; image?: { file: File } }) => {
@@ -182,7 +182,7 @@ const CategoryManagement = () => {
   }
 
   const handleEditFinishFailed = () => {
-    toast.error('Please fill out the form correctly')
+    toast.error('Vui lòng điền đầy đủ các thông tin!')
   }
 
   if (isLoading) return <div>Loading...</div>
@@ -204,11 +204,11 @@ const CategoryManagement = () => {
           <Form.Item
             name="name"
             label="Tên danh mục"
-            rules={[{ required: true, message: 'Please input the category name!' }]}
+            rules={[{ required: true, message: 'Vui lòng nhập tên danh mục!' }]}
           >
             <Input placeholder="Category Name" />
           </Form.Item>
-          <Form.Item name="image" label="Hình ảnh" rules={[{ required: true, message: 'Please upload an image!' }]}>
+          <Form.Item name="image" label="Hình ảnh" rules={[{ required: true, message: 'Vui lòng tải lên hình ảnh!' }]}>
             <Upload
               name="image"
               listType="picture"
@@ -241,11 +241,11 @@ const CategoryManagement = () => {
             <strong>Tên danh mục:</strong> {currentCategory?.name}
           </p>
           <p>
-            <strong>Thumbnail:</strong>{' '}
+            <strong>Thumbnail:</strong>
             <img
               src={currentCategory?.image}
               alt={currentCategory?.name}
-              className="w-200 max-h-200 object-cover my-2"
+              className="w-full max-h-200 object-cover my-2"
             />
           </p>
         </div>

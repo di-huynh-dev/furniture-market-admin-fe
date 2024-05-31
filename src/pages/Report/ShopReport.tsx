@@ -115,7 +115,7 @@ const ShopReport = () => {
       cell: (row) => (
         <div className="flex gap-2 items-center">
           <button className="btn btn-primary flex gap-1" onClick={() => showReportDetails(row)}>
-            <AiOutlineEye className="w-5 h-5" />
+            <AiOutlineEye className="w-5 h-5 text-gray-500" />
           </button>
           <Popconfirm
             title="Yêu cầu giải trình"
@@ -127,7 +127,7 @@ const ShopReport = () => {
               handleRequestExecute('PROCESSING')
             }}
           >
-            <AiFillAlert className="w-5 h-5 text-yellow-500" />
+            <AiFillAlert className="w-5 h-5 text-gray-500" />
           </Popconfirm>
         </div>
       ),

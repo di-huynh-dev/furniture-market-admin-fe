@@ -1,17 +1,39 @@
 import { useAuthStoreSelectors } from '@/store/auth-store'
 import { LoginData } from '@/types/user.type'
-import { Layout } from 'antd'
+import { Layout, Modal } from 'antd'
 const { Header } = Layout
 import { Avatar, Space, Dropdown, Input } from 'antd'
 import type { MenuProps } from 'antd'
 import { LogOut, Settings, User, Bell, Search } from 'lucide-react'
+import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 
 const HeaderComponent = ({ auth }: { auth: LoginData }) => {
   const removeAuth = useAuthStoreSelectors.use.removeAuth()
-  const navigate = useNavigate()
+  const [open, setOpen] = useState(false)
+  const [confirmLoading, setConfirmLoading] = useState(false)
 
+  const navigate = useNavigate()
+  const showModal = () => {
+    setOpen(true)
+  }
+
+  const handleOk = () => {
+    setConfirmLoading(true)
+    setTimeout(() => {
+      setOpen(false)
+      setConfirmLoading(false)
+      removeAuth()
+      navigate('/login')
+      toast.success('Đăng xuất thành công!')
+    }, 1000)
+  }
+
+  const handleCancel = () => {
+    console.log('Clicked cancel button')
+    setOpen(false)
+  }
   const items: MenuProps['items'] = [
     {
       key: '1',
@@ -36,9 +58,7 @@ const HeaderComponent = ({ auth }: { auth: LoginData }) => {
       label: (
         <button
           onClick={() => {
-            removeAuth()
-            navigate('/login')
-            toast.success('Đăng xuất thành công!')
+            showModal()
           }}
         >
           Đăng xuất
@@ -50,6 +70,9 @@ const HeaderComponent = ({ auth }: { auth: LoginData }) => {
 
   return (
     <Header className="bg-white border-b">
+      <Modal title="Xác nhận" open={open} onOk={handleOk} confirmLoading={confirmLoading} onCancel={handleCancel}>
+        <p>Bạn chắc chắn muốn đăng xuất khỏi tài khoản này?</p>
+      </Modal>
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-4">
           <Input

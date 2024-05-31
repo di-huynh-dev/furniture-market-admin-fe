@@ -2,7 +2,7 @@
 import { query_keys } from '@/constants/query-keys'
 import useAxiosPrivate from '@/hooks/useAxiosPrivate'
 import { WithdrawType } from '@/types/transaction.type'
-import { formatDate, formatPrice } from '@/utils/helpers'
+import { formatPrice } from '@/utils/helpers'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { Popconfirm, Tag } from 'antd'
 import { CircleOff, SquareCheckBig } from 'lucide-react'
@@ -21,10 +21,10 @@ const WithdrawManagement = () => {
     },
   })
 
-  const updateWithdrawStatus = async (id: string) => {
+  const updateWithdrawStatus = async (id: string, status: string) => {
     try {
       const resp = await axiosPrivate.put(`/admin/withdrawal/status/${id}`, {
-        status: 'DONE',
+        status: status,
       })
       if (resp.status === 200) {
         toast.success(resp.data.messages[0])
@@ -58,11 +58,11 @@ const WithdrawManagement = () => {
     },
     {
       name: 'Thời gian tạo',
-      cell: (row) => formatDate(row.createdAt),
+      cell: (row) => row.createdAt,
     },
     {
       name: 'Cập nhật',
-      cell: (row) => formatDate(row.updatedAt),
+      cell: (row) => row.updatedAt,
     },
     {
       name: 'Trạng thái',
@@ -77,20 +77,20 @@ const WithdrawManagement = () => {
           <Popconfirm
             title="Cập nhật trạng thái"
             description="Bạn chắc chắn thay đổi trạng thái giao dịch này?"
-            onConfirm={() => updateWithdrawStatus(row.id)}
+            onConfirm={() => updateWithdrawStatus(row.id, 'DONE')}
             okText="Yes"
             cancelText="No"
           >
-            <SquareCheckBig />
+            <SquareCheckBig className="w-5 h-5" />
           </Popconfirm>
           <Popconfirm
             title="Giao dịch thất bại"
             description="Bạn chắc chắn thay đổi trạng thái giao dịch này?"
-            onConfirm={() => updateWithdrawStatus(row.id)}
+            onConfirm={() => updateWithdrawStatus(row.id, 'FAIL')}
             okText="Yes"
             cancelText="No"
           >
-            <CircleOff />
+            <CircleOff className="w-5 h-5" />
           </Popconfirm>
         </div>
       ),

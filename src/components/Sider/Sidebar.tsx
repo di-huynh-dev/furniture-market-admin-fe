@@ -45,7 +45,19 @@ const Sidebar = ({ auth }: { auth: LoginData }) => {
         <img src={auth?.user.avatar} className="w-10 h-10 rounded-full" alt="" />
         <div>
           <p className="font-bold">{auth?.user.fullName}</p>
-          <p className="text-sm italic">{auth?.user.role}</p>
+          <p className="text-sm italic">
+            {auth?.user.role === 'ADMIN'
+              ? 'Quản trị hệ thống'
+              : auth?.user.role === 'ADMIN_ORDER'
+              ? 'Quản trị Đơn hàng'
+              : auth?.user.role === 'ADMIN_REPORT'
+              ? 'Quản trị Báo cáo'
+              : auth?.user.role === 'ADMIN_MARKETING'
+              ? 'Quản trị Marketing'
+              : auth?.user.role === 'ADMIN_CSKH'
+              ? 'Quản trị CSKH'
+              : ''}
+          </p>
         </div>
       </div>,
     ),

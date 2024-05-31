@@ -4,7 +4,8 @@ import useAxiosPrivate from '@/hooks/useAxiosPrivate'
 import { ReturnOrderType } from '@/types/refund.type'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import type { TabsProps } from 'antd'
-import { Button, Drawer, Popconfirm, Tabs, Tag } from 'antd'
+import { Drawer, Popconfirm, Tabs, Tag } from 'antd'
+import { CircleOff, SquareCheckBig } from 'lucide-react'
 import { useState } from 'react'
 import DataTable, { TableColumn } from 'react-data-table-component'
 import toast from 'react-hot-toast'
@@ -27,7 +28,6 @@ const ReturnOrderManagement = () => {
       return resp.data.data
     },
   })
-  console.log(data)
 
   const handleAccessRefund = async (id: string, status: boolean) => {
     try {
@@ -47,21 +47,21 @@ const ReturnOrderManagement = () => {
   }
 
   const columns: TableColumn<ReturnOrderType>[] = [
-    { name: 'ID', selector: (row) => row.id },
+    { name: 'ID', cell: (row) => row.id },
     { name: 'Nội dung giải trình', cell: (row) => row.reason },
     {
       name: 'Mã đơn hàng',
       cell: (row) => row.orderRefundResponse.orderId,
     },
     {
-      name: 'Trạng thái',
+      name: 'Trạng thái yêu cầu',
       cell: (row) => <Tag color={row.done ? 'green' : 'red'}>{row.done ? 'Đã xử lý' : 'Chưa xử lý'}</Tag>,
     },
     {
-      name: 'Chấp nhận ',
+      name: 'Trạng thái hoàn',
       cell: (row) => (
         <Tag color={row.orderRefundResponse.accepted ? 'green' : 'red'}>
-          {row.orderRefundResponse.accepted ? 'Đồng ý' : 'Từ chối'}
+          {row.orderRefundResponse.accepted ? 'Đã hoàn' : 'Từ chối'}
         </Tag>
       ),
     },
@@ -79,7 +79,7 @@ const ReturnOrderManagement = () => {
             okText="Yes"
             cancelText="No"
           >
-            <Button>Hoàn đơn</Button>
+            <SquareCheckBig className="w-5 h-5" />
           </Popconfirm>
           <Popconfirm
             title="Xác nhận từ chối hoàn tiền đơn hàng?"
@@ -88,7 +88,7 @@ const ReturnOrderManagement = () => {
             okText="Yes"
             cancelText="No"
           >
-            <Button>Từ chối</Button>
+            <CircleOff className="w-5 h-5" />
           </Popconfirm>
         </div>
       ),

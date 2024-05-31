@@ -4,6 +4,7 @@ import { TransactionType } from '@/types/transaction.type'
 import { formatPrice } from '@/utils/helpers'
 import { useQuery } from '@tanstack/react-query'
 import DataTable, { TableColumn } from 'react-data-table-component'
+import { HiArrowRightEndOnRectangle, HiArrowRightOnRectangle } from 'react-icons/hi2'
 
 const TransactionManagement = () => {
   const axiosPrivate = useAxiosPrivate()
@@ -31,11 +32,25 @@ const TransactionManagement = () => {
 
     {
       name: 'Loại giao dịch',
-      cell: (row) => row.type,
+      cell: (row) =>
+        row.type === 'CHARGE' ? (
+          <div className="flex gap-1 items-center">
+            <HiArrowRightEndOnRectangle className="w-6 h-6" /> <p>Nạp</p>
+          </div>
+        ) : (
+          <div className="flex gap-1 items-center">
+            <HiArrowRightOnRectangle className="w-6 h-6" /> <p>Rút</p>
+          </div>
+        ),
     },
     {
       name: 'Giá trị',
-      cell: (row) => formatPrice(row.value),
+      cell: (row) =>
+        row.type === 'CHARGE' ? (
+          <p className="text-green-500">{formatPrice(row.value)}</p>
+        ) : (
+          <p className="text-red-500">{formatPrice(row.value * -1)}</p>
+        ),
     },
     {
       name: 'Thời gian',

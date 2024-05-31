@@ -89,7 +89,7 @@ const RoleManagement = () => {
       ),
     },
     {
-      name: 'Email (Trạng thái)',
+      name: 'Email',
       cell: (row) => (
         <div className="flex items-center gap-2">
           <p>{row.email}</p>
@@ -103,12 +103,11 @@ const RoleManagement = () => {
     },
     {
       name: 'Giới tính',
-      selector: (row) => row.gender,
+      selector: (row) => (row.gender !== 'MALE' ? 'Nữ' : 'Nam'),
     },
     {
       name: 'Trạng thái',
-      cell: (row) =>
-        row.active ? <Tag color="#87d068">Đang hoạt động</Tag> : <Tag color="#f50">Tạm dừng hoạt động</Tag>,
+      cell: (row) => (row.active ? <Tag color="green">Đang hoạt động</Tag> : <Tag color="red">Tạm dừng hoạt động</Tag>),
     },
     {
       name: 'Vai trò',
