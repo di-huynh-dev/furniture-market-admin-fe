@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Layout } from 'antd'
 import { Outlet } from 'react-router-dom'
 import { Header } from '@/components'
@@ -8,13 +8,18 @@ const { Content, Footer } = Layout
 
 const HomeLayout: React.FC = () => {
   const auth = useAuthStore((state) => state.admin_auth)
-
+  const [collapsed, setCollapsed] = useState(false)
   return (
     <Layout style={{ minHeight: '100vh' }}>
-      <Sidebar auth={auth} />
-      <Layout>
+      <Sidebar auth={auth} collapsed={collapsed} setCollapsed={setCollapsed} />
+      <Layout
+        style={{
+          marginLeft: collapsed ? 80 : 200,
+          transition: 'margin-left 0.2s',
+        }}
+      >
         <Header auth={auth} />
-        <Content className="p-4">
+        <Content style={{ marginTop: 64, padding: '0 24px', minHeight: 'calc(100vh - 64px)' }}>
           <Outlet />
         </Content>
         <Footer style={{ textAlign: 'center' }}>Furniture Market ©{new Date().getFullYear()} Created by DD</Footer>

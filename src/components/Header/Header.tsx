@@ -8,6 +8,7 @@ import { LogOut, Settings, User, Bell, Search } from 'lucide-react'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
+import Logo from '@/assets/logo/Logo1.png'
 
 const HeaderComponent = ({ auth }: { auth: LoginData }) => {
   const removeAuth = useAuthStoreSelectors.use.removeAuth()
@@ -31,7 +32,6 @@ const HeaderComponent = ({ auth }: { auth: LoginData }) => {
   }
 
   const handleCancel = () => {
-    console.log('Clicked cancel button')
     setOpen(false)
   }
   const items: MenuProps['items'] = [
@@ -69,11 +69,14 @@ const HeaderComponent = ({ auth }: { auth: LoginData }) => {
   ]
 
   return (
-    <Header className="bg-white border-b">
+    <Header className="p-0 bg-white fixed top-0 left-0 right-0 z-10">
       <Modal title="Xác nhận" open={open} onOk={handleOk} confirmLoading={confirmLoading} onCancel={handleCancel}>
         <p>Bạn chắc chắn muốn đăng xuất khỏi tài khoản này?</p>
       </Modal>
       <div className="flex justify-between items-center">
+        <div>
+          <img src={Logo} alt="" className="w-[150px]" />
+        </div>
         <div className="flex items-center gap-4">
           <Input
             placeholder="Tìm kiếm..."

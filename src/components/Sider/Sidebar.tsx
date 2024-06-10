@@ -1,3 +1,4 @@
+import React from 'react'
 import {
   BarChartHorizontalBig,
   ListCollapse,
@@ -19,8 +20,8 @@ import type { MenuProps } from 'antd'
 import { Layout, Menu } from 'antd'
 import { useNavigate } from 'react-router-dom'
 import { admin_routes } from '@/constants/router-links'
-import { useState } from 'react'
 import { LoginData } from '@/types/user.type'
+
 const { Sider } = Layout
 
 type MenuItem = Required<MenuProps>['items'][number]
@@ -34,34 +35,18 @@ function getItem(label: React.ReactNode, key: React.Key, icon?: React.ReactNode,
   } as MenuItem
 }
 
-const Sidebar = ({ auth }: { auth: LoginData }) => {
-  const [collapsed, setCollapsed] = useState(false)
+const Sidebar = ({
+  auth,
+  collapsed,
+  setCollapsed,
+}: {
+  auth: LoginData
+  collapsed: boolean
+  setCollapsed: (value: boolean) => void
+}) => {
   const navigate = useNavigate()
 
   const items: MenuItem[] = [
-    getItem(
-      '',
-      '0',
-      <div className="flex items-center gap-2">
-        <img src={auth?.user.avatar} className="w-10 h-10 rounded-full" alt="" />
-        <div>
-          <p className="font-bold">{auth?.user.fullName}</p>
-          <p className="text-sm italic">
-            {auth?.user.role === 'ADMIN'
-              ? 'Quản trị hệ thống'
-              : auth?.user.role === 'ADMIN_ORDER'
-              ? 'Quản trị Đơn hàng'
-              : auth?.user.role === 'ADMIN_REPORT'
-              ? 'Quản trị Báo cáo'
-              : auth?.user.role === 'ADMIN_MARKETING'
-              ? 'Quản trị Marketing'
-              : auth?.user.role === 'ADMIN_CSKH'
-              ? 'Quản trị CSKH'
-              : ''}
-          </p>
-        </div>
-      </div>,
-    ),
     getItem('Dashboard', '1', <BarChartHorizontalBig className="w-5 h-5" />),
     getItem('Danh mục', '2', <ListCollapse className="w-5 h-5" />),
     getItem('Người dùng', 'sub1', <Users className="w-5 h-5" />, [
@@ -72,7 +57,6 @@ const Sidebar = ({ auth }: { auth: LoginData }) => {
       getItem('Hệ thống', '5', <ArrowLeftRight className="w-5 h-5" />),
       getItem('Yêu cầu rút', '6', <Undo2 className="w-5 h-5" />),
     ]),
-
     getItem('Báo cáo', 'sub3', <MessageSquareWarning className="w-5 h-5" />, [
       getItem('Sản phẩm', '7', <Armchair className="w-5 h-5" />),
       getItem('Shop', '8', <Store className="w-5 h-5" />),
@@ -123,11 +107,43 @@ const Sidebar = ({ auth }: { auth: LoginData }) => {
         break
     }
   }
+
   return (
-    <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-      <div className="demo-logo-vertical" />
+    <Sider
+      style={{
+        overflow: 'auto',
+        height: '100vh',
+        position: 'fixed',
+        left: 0,
+        top: 70,
+        bottom: 0,
+        background: 'white',
+      }}
+      collapsible
+      collapsed={collapsed}
+      onCollapse={(value) => setCollapsed(value)}
+    >
+      <div className="flex justify-center">
+        <img src={auth?.user.avatar} className="w-10 h-10 rounded-full" alt="" />
+      </div>
+      <p className="font-bold text-center">{auth?.user.fullName}</p>
+      {collapsed ? null : (
+        <p className="text-center text-xs">
+          {auth?.user.role === 'ADMIN'
+            ? 'Quản trị hệ thống'
+            : auth?.user.role === 'ADMIN_ORDER'
+            ? 'Quản trị Đơn hàng'
+            : auth?.user.role === 'ADMIN_REPORT'
+            ? 'Quản trị Báo cáo'
+            : auth?.user.role === 'ADMIN_MARKETING'
+            ? 'Quản trị Marketing'
+            : auth?.user.role === 'ADMIN_CSKH'
+            ? 'Quản trị CSKH'
+            : ''}
+        </p>
+      )}
       <Menu
-        theme="dark"
+        theme="light"
         defaultSelectedKeys={['1']}
         mode="inline"
         items={items}
