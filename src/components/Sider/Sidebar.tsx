@@ -8,11 +8,9 @@ import {
   MessageSquareWarning,
   Armchair,
   Store,
-  ShoppingCart,
   BadgeDollarSign,
   Undo2,
   ArrowLeftRight,
-  ListOrdered,
   Undo,
   PartyPopper,
 } from 'lucide-react'
@@ -62,10 +60,7 @@ const Sidebar = ({
       getItem('Sản phẩm', '7', <Armchair className="w-5 h-5" />),
       getItem('Shop', '8', <Store className="w-5 h-5" />),
     ]),
-    getItem('Đơn hàng', 'sub4', <ShoppingCart className="w-5 h-5" />, [
-      getItem('Hệ thống', '9', <ListOrdered className="w-5 h-5" />),
-      getItem('Đơn hoàn', '10', <Undo className="w-5 h-5" />),
-    ]),
+    getItem('Đơn hoàn', '10', <Undo className="w-5 h-5" />),
     getItem('Quảng cáo', '11', <PartyPopper className="w-5 h-5" />),
   ]
 

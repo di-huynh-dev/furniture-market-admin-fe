@@ -9,6 +9,7 @@ import { formatPrice } from '@/utils/helpers'
 import IncomeLineChart from './components/IncomeLineChart'
 import OrderBarChart from './components/OrderBarChart'
 import LoadingComponent from '@/components/Loading/LoadingComponent'
+import MarketingIncomeLineChart from './components/MarketingIncomeLineChart'
 
 const Dashboard = () => {
   const axiosPrivate = useAxiosPrivate()
@@ -130,6 +131,9 @@ const Dashboard = () => {
 
       <div className="rounded-md border w-full py-4 justify-center bg-white my-2">
         <IncomeLineChart data={statistics} />
+      </div>
+      <div className="rounded-md border w-full py-4 justify-center bg-white my-2">
+        <MarketingIncomeLineChart data={statistics} />
       </div>
       <div className="rounded-md border w-full py-4 justify-center bg-white my-2">
         <OrderBarChart data={statistics} />

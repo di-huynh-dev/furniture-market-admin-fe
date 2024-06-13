@@ -7,7 +7,7 @@ export type StatisticType = {
   incomeByDays: StatisticIncomeType[]
   marketing: {
     income: number
-    incomeByDate: StatisticIncomeType[]
+    incomeByDays: StatisticIncomeType[]
   }
   orderByDate: StatisticIncomeType[]
 }

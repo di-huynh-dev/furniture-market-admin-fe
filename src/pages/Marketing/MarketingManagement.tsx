@@ -2,6 +2,7 @@ import LoadingComponent from '@/components/Loading/LoadingComponent'
 import { query_keys } from '@/constants/query-keys'
 import useAxiosPrivate from '@/hooks/useAxiosPrivate'
 import { MarketingType } from '@/types/marketing.type'
+import { formatDate } from '@/utils/helpers'
 import { useQuery } from '@tanstack/react-query'
 import DataTable, { TableColumn } from 'react-data-table-component'
 
@@ -21,15 +22,15 @@ const MarketingManagement = () => {
     {
       name: 'Danh sách sản phẩm',
       cell: (row) => (
-        <>
+        <div>
           {row.productIds.map((item) => (
             <p>{item}</p>
           ))}
-        </>
+        </div>
       ),
     },
-    { name: 'Ngày bắt đầu', cell: (row) => row.startDate },
-    { name: 'Ngày kết thuật', cell: (row) => row.endDate },
+    { name: 'Ngày bắt đầu', cell: (row) => formatDate(row.startDate) },
+    { name: 'Ngày kết thúc', cell: (row) => formatDate(row.endDate) },
     {
       name: 'Từ khóa',
       cell: (row) => (
