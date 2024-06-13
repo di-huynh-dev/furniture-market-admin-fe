@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-  BarChartHorizontalBig,
+  BarChart3,
   ListCollapse,
   Users,
   User,
@@ -47,12 +47,13 @@ const Sidebar = ({
   const navigate = useNavigate()
 
   const items: MenuItem[] = [
-    getItem('Dashboard', '1', <BarChartHorizontalBig className="w-5 h-5" />),
+    getItem('Dashboard', '1', <BarChart3 className="w-5 h-5" />),
     getItem('Danh mục', '2', <ListCollapse className="w-5 h-5" />),
     getItem('Người dùng', 'sub1', <Users className="w-5 h-5" />, [
       getItem('Hệ thống', '3', <User className="w-5 h-5" />),
       getItem('Quản trị', '4', <ShieldPlus className="w-5 h-5" />),
     ]),
+    getItem('Cửa hàng', '12', <Store className="w-5 h-5" />),
     getItem('Giao dịch', 'sub2', <BadgeDollarSign />, [
       getItem('Hệ thống', '5', <ArrowLeftRight className="w-5 h-5" />),
       getItem('Yêu cầu rút', '6', <Undo2 className="w-5 h-5" />),
@@ -103,6 +104,9 @@ const Sidebar = ({
       case '11':
         navigate(admin_routes.marketing)
         break
+      case '12':
+        navigate(admin_routes.store)
+        break
       default:
         break
     }
@@ -112,7 +116,7 @@ const Sidebar = ({
     <Sider
       style={{
         overflow: 'auto',
-        height: '100vh',
+        height: '80vh',
         position: 'fixed',
         left: 0,
         top: 70,

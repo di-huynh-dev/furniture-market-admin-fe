@@ -10,7 +10,7 @@ const HomeLayout: React.FC = () => {
   const auth = useAuthStore((state) => state.admin_auth)
   const [collapsed, setCollapsed] = useState(false)
   return (
-    <Layout style={{ minHeight: '100vh' }}>
+    <Layout>
       <Sidebar auth={auth} collapsed={collapsed} setCollapsed={setCollapsed} />
       <Layout
         style={{
@@ -19,7 +19,7 @@ const HomeLayout: React.FC = () => {
         }}
       >
         <Header auth={auth} />
-        <Content style={{ marginTop: 64, padding: '0 24px', minHeight: 'calc(100vh - 64px)' }}>
+        <Content style={{ marginTop: 64, padding: '10px 12px', minHeight: 'calc(100vh - 64px)' }}>
           <Outlet />
         </Content>
         <Footer style={{ textAlign: 'center' }}>Furniture Market ©{new Date().getFullYear()} Created by DD</Footer>

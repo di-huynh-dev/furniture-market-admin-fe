@@ -190,9 +190,6 @@ const CategoryManagement = () => {
 
   return (
     <>
-      <div className="card bg-white my-2 p-4">
-        <p className="font-bold capitalize">Quản lý danh mục hệ thống</p>
-      </div>
       <Modal
         title="Thêm danh mục"
         open={isAddModalOpen}
@@ -293,6 +290,7 @@ const CategoryManagement = () => {
         </Form>
       </Modal>
       <DataTable
+        title={<p className="">Quản lý danh mục hệ thống</p>}
         columns={columns}
         data={filteredItems}
         pagination

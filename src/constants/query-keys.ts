@@ -9,4 +9,5 @@ export const query_keys = {
   STATISTIC: 'STATISTIC',
   REFUND_ORDER: 'REFUND_ORDER',
   MARKETING: 'MARKETING',
+  STORE_LIST: 'STORE_LIST',
 }

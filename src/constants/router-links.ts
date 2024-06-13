@@ -18,5 +18,6 @@ export const admin_routes = {
   statictis: '/statictis',
   chat: '/chat',
   order: '/orders',
+  store: '/stores',
   return_orders: '/return-orders',
 }

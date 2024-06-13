@@ -2,6 +2,7 @@ export type OrderItem = {
   id: string
   responses: ResponseItem[]
   status: string
+  paid: boolean
   total: number
   storeInfo: {
     id: string

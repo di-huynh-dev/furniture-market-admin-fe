@@ -7,7 +7,7 @@ const AppProviders = ({ children }: PropsWithChildren) => {
   return (
     <QueryClientProvider client={queryCLient}>
       {children} <Toaster />
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>
   )
 }

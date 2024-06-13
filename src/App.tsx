@@ -9,6 +9,7 @@ import {
   ReturnOrderManagement,
   RoleManagement,
   ShopReportManagement,
+  StoreManagement,
   SystemUsersManagement,
   TransactionManagement,
   WithdrawManagement,
@@ -92,6 +93,10 @@ function App() {
               <WithdrawManagement />
             </ProtectedByRole>
           ),
+        },
+        {
+          path: admin_routes.store,
+          element: <StoreManagement />,
         },
         {
           path: admin_routes.report_shops,
