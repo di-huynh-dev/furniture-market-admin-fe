@@ -4,6 +4,7 @@ import {
   ForgotPassword,
   Login,
   MarketingManagement,
+  OrderDetail,
   OrderManagement,
   ProductReportManagement,
   ReturnOrderManagement,
@@ -105,6 +106,10 @@ function App() {
         {
           path: admin_routes.report_products,
           element: <ProductReportManagement />,
+        },
+        {
+          path: admin_routes.order_detail,
+          element: <OrderDetail />,
         },
         {
           path: admin_routes.return_orders,

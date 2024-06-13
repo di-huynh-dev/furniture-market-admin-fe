@@ -20,4 +20,5 @@ export const admin_routes = {
   order: '/orders',
   store: '/stores',
   return_orders: '/return-orders',
+  order_detail: '/order-detail/:id',
 }

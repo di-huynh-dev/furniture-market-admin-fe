@@ -8,7 +8,7 @@ import type { MenuProps } from 'antd'
 import { LogOut, Settings, User, Bell, Search } from 'lucide-react'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Logo from '@/assets/logo/Logo1.png'
 import { useMutation } from '@tanstack/react-query'
 import useAxiosPrivate from '@/hooks/useAxiosPrivate'
@@ -119,16 +119,16 @@ const HeaderComponent = ({ auth }: { auth: LoginData }) => {
             <Select defaultValue="store" options={options} onChange={(value) => setSearchType(value)} />
             <Input
               placeholder="Tìm kiếm..."
-              className="w-[400px]"
+              className="w-[440px]"
               suffix={<Search className="w-5 h-5 text-[#1677ff]" />}
               onChange={handleSearchChange}
               allowClear
             />
           </Space.Compact>
           {isDropdownVisible && searchResults.length > 0 && (
-            <div className="absolute top-full mt-2 w-full bg-white shadow-md border rounded z-10 scroll-y-auto12">
+            <div className="absolute top-full mt-2 w-full bg-white shadow-md border rounded z-10 scroll-y-auto">
               {searchResults.map((result) => (
-                <div key={result.id} className="p-2 hover:bg-gray-100 cursor-pointer">
+                <div key={result.id} className="px-2 hover:bg-gray-100 cursor-pointer">
                   {isStoreType(result) ? (
                     <div className="grid grid-cols-4 gap-1">
                       <img src={result.logo} className=" w-20 col-span-1" alt="" />
@@ -139,11 +139,11 @@ const HeaderComponent = ({ auth }: { auth: LoginData }) => {
                       </div>
                     </div>
                   ) : (
-                    <>
+                    <Link to={`/order-detail/${result.id}`}>
                       <p>
-                        Đơn hàng<strong> {result.id}</strong> của {result.storeInfo.name}{' '}
+                        Đơn hàng<strong> {result.id}</strong> của {result.storeInfo.name}
                       </p>
-                    </>
+                    </Link>
                   )}
                 </div>
               ))}
