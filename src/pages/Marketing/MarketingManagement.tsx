@@ -4,10 +4,15 @@ import useAxiosPrivate from '@/hooks/useAxiosPrivate'
 import { MarketingType } from '@/types/marketing.type'
 import { formatDate } from '@/utils/helpers'
 import { useQuery } from '@tanstack/react-query'
+import { useEffect } from 'react'
 import DataTable, { TableColumn } from 'react-data-table-component'
 
 const MarketingManagement = () => {
   const axiosPrivate = useAxiosPrivate()
+
+  useEffect(() => {
+    document.title = 'Quản lý Marketing'
+  }, [])
 
   const { data, isLoading } = useQuery({
     queryKey: [query_keys.MARKETING],

@@ -8,7 +8,7 @@ import { Badge, Popconfirm, Tag, Drawer, Button, Modal, Form, Select } from 'ant
 import { AiFillLock, AiOutlineEye, AiOutlineSearch } from 'react-icons/ai'
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons'
 import toast from 'react-hot-toast'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Input, { SearchProps } from 'antd/es/input'
 import Search from 'antd/es/input/Search'
 import LoadingComponent from '@/components/Loading/LoadingComponent'
@@ -21,6 +21,10 @@ const RoleManagement = () => {
   const [currentUser, setCurrentUser] = useState<UserType | null>(null)
   const [filterText, setFilterText] = useState('')
   const [form] = Form.useForm()
+
+  useEffect(() => {
+    document.title = 'Quản lý phân quyền'
+  }, [])
 
   const { data: userList, isLoading } = useQuery({
     queryKey: [query_keys.USER_LIST],

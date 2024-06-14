@@ -3,11 +3,16 @@ import { query_keys } from '@/constants/query-keys'
 import useAxiosPrivate from '@/hooks/useAxiosPrivate'
 import { useQuery } from '@tanstack/react-query'
 import { Card } from 'antd'
+import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
 const StoreDetail = () => {
   const { id } = useParams()
   const axiosPrivate = useAxiosPrivate()
+
+  useEffect(() => {
+    document.title = 'Chi tiết cửa hàng'
+  }, [])
 
   const { data, isLoading } = useQuery({
     queryKey: [query_keys.SHOP_DETAIL, id],

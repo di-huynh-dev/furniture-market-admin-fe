@@ -10,7 +10,7 @@ import IncomeLineChart from './components/IncomeLineChart'
 import OrderBarChart from './components/OrderBarChart'
 import LoadingComponent from '@/components/Loading/LoadingComponent'
 import MarketingIncomeLineChart from './components/MarketingIncomeLineChart'
-
+import { GiChessQueen } from 'react-icons/gi'
 const Dashboard = () => {
   const axiosPrivate = useAxiosPrivate()
   const currentDate = new Date()
@@ -18,6 +18,10 @@ const Dashboard = () => {
   const currentMonth = currentDate.getMonth() + 1
   const [month, setMonth] = useState(currentMonth)
   const [year, setYear] = useState(currentYear)
+
+  useEffect(() => {
+    document.title = 'Dashboard'
+  }, [])
 
   const {
     data: statistics,
@@ -101,6 +105,15 @@ const Dashboard = () => {
         </div>
         <div className="card shadow-lg items-center gap-2 grid grid-cols-2  bg-white px-6 py-4">
           <div>
+            <p className="font-bold">Hoa hồng quảng cáo</p>
+            <p className="md:text-2xl text-lg">{formatPrice(statistics?.marketing.income)}</p>
+          </div>
+          <div className="flex justify-end">
+            <GiChessQueen className="md:h-20 w-16 h-16 text-pink-500" />
+          </div>
+        </div>
+        <div className="card shadow-lg items-center gap-2 grid grid-cols-2  bg-white px-6 py-4">
+          <div>
             <p className="font-bold">Tổng số đơn hàng</p>
             <p className="md:text-2xl text-lg">{statistics?.numOfOrderByMonth}</p>
           </div>
@@ -115,7 +128,7 @@ const Dashboard = () => {
             <p className="md:text-2xl text-lg">{statistics?.numOfBuyer}</p>
           </div>
           <div className="flex justify-end">
-            <FaUser className="md:h-20 w-16 h-16 text-blue-500" />
+            <FaUser className="md:h-20 w-16 h-16 text-green-500" />
           </div>
         </div>
         <div className="card shadow-lg items-center gap-2 grid grid-cols-2  bg-white px-6 py-4">

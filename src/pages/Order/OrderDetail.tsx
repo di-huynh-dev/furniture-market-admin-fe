@@ -5,11 +5,16 @@ import { ResponseItem } from '@/types/order.type'
 import { formatPrice } from '@/utils/helpers'
 import { useQuery } from '@tanstack/react-query'
 import { Card, Tag, Timeline } from 'antd'
+import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
 const OrderDetail = () => {
   const { id } = useParams()
   const axiosPrivate = useAxiosPrivate()
+
+  useEffect(() => {
+    document.title = 'Chi tiết đơn hàng'
+  }, [])
 
   const { data, isLoading } = useQuery({
     queryKey: [query_keys.ORDER_DETAIL, id],

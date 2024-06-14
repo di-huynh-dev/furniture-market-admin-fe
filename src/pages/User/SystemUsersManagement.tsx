@@ -7,7 +7,7 @@ import DataTable, { TableColumn } from 'react-data-table-component'
 import { Badge, Popconfirm, Tag, Drawer } from 'antd'
 import { AiFillLock, AiOutlineEye, AiOutlineSearch } from 'react-icons/ai'
 import toast from 'react-hot-toast'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { SearchProps } from 'antd/es/input'
 import Search from 'antd/es/input/Search'
 
@@ -17,6 +17,10 @@ const SystemUsersManagement = () => {
   const [isViewModalOpen, setIsViewModalOpen] = useState(false)
   const [currentUser, setCurrentUser] = useState<UserType | null>(null)
   const [filterText, setFilterText] = useState('')
+
+  useEffect(() => {
+    document.title = 'Quản lý người dùng'
+  }, [])
 
   const {
     data: userList,

@@ -7,7 +7,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query'
 import type { TabsProps } from 'antd'
 import { Drawer, Popconfirm, Tabs, Tag } from 'antd'
 import { CircleOff, SquareCheckBig } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import DataTable, { TableColumn } from 'react-data-table-component'
 import toast from 'react-hot-toast'
 import { AiOutlineEye } from 'react-icons/ai'
@@ -18,6 +18,11 @@ const ReturnOrderManagement = () => {
   const [status, setStatus] = useState(false)
   const [isViewModalOpen, setIsViewModalOpen] = useState(false)
   const [currentRefundReport, setCurrentRefundReport] = useState<ReturnOrderType | null>(null)
+
+  useEffect(() => {
+    document.title = 'Quản lý đơn hoàn'
+  }, [])
+
   const onChange = () => {
     setStatus(!status)
   }

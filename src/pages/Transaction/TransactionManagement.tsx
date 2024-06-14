@@ -4,11 +4,16 @@ import useAxiosPrivate from '@/hooks/useAxiosPrivate'
 import { TransactionType } from '@/types/transaction.type'
 import { formatPrice } from '@/utils/helpers'
 import { useQuery } from '@tanstack/react-query'
+import { useEffect } from 'react'
 import DataTable, { TableColumn } from 'react-data-table-component'
 import { HiArrowRightEndOnRectangle, HiArrowRightOnRectangle } from 'react-icons/hi2'
 
 const TransactionManagement = () => {
   const axiosPrivate = useAxiosPrivate()
+
+  useEffect(() => {
+    document.title = 'Quản lý giao dịch'
+  }, [])
 
   const { data: transactions, isLoading } = useQuery({
     queryKey: [query_keys.TRANSACTION],

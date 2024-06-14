@@ -5,7 +5,7 @@ import useAxiosPrivate from '@/hooks/useAxiosPrivate'
 import { ReportedType } from '@/types/reported.type'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { Badge, Button, Drawer, Popconfirm, Tag } from 'antd'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import DataTable, { TableColumn } from 'react-data-table-component'
 import toast from 'react-hot-toast'
 import { AiOutlineEye, AiFillAlert } from 'react-icons/ai'
@@ -16,6 +16,10 @@ const ProductReport = () => {
   const [selectedRow, setSelectedRow] = useState('')
   const [isViewModalOpen, setIsViewModalOpen] = useState(false)
   const [currentReport, setCurrentReport] = useState<ReportedType | null>(null)
+
+  useEffect(() => {
+    document.title = 'Báo cáo sản phẩm'
+  }, [])
 
   const { data: reportedProducts, isLoading } = useQuery({
     queryKey: [query_keys.REPORTED_PRODUCT_LIST, 'product'],

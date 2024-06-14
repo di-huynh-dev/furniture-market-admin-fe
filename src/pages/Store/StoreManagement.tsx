@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button, Drawer, Modal, Tag } from 'antd'
 import DataTable, { TableColumn } from 'react-data-table-component'
 import { AiOutlineEye } from 'react-icons/ai'
@@ -28,6 +28,10 @@ const StoreManagement = () => {
   const [currentDescription, setCurrentDescription] = useState('')
   const [isOrderDetailsModalOpen, setIsOrderDetailsModalOpen] = useState(false)
   const [currentOrderDetails, setCurrentOrderDetails] = useState<ResponseItem[]>([])
+
+  useEffect(() => {
+    document.title = 'Quản lý cửa hàng'
+  }, [])
 
   const { data: storeList, isLoading } = useQuery({
     queryKey: [query_keys.STORE_LIST],

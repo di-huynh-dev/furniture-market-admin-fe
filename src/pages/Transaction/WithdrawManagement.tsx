@@ -9,12 +9,16 @@ import { Popconfirm, Tag, Tabs } from 'antd'
 import { CircleOff, SquareCheckBig } from 'lucide-react'
 import DataTable, { TableColumn } from 'react-data-table-component'
 import toast from 'react-hot-toast'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const WithdrawManagement = () => {
   const axiosPrivate = useAxiosPrivate()
   const queryClient = useQueryClient()
   const [activeTab, setActiveTab] = useState('PROCESSING')
+
+  useEffect(() => {
+    document.title = 'Quản lý nạp/rút'
+  }, [])
 
   const { data: transactions, isLoading } = useQuery({
     queryKey: [query_keys.WITHDRAW],
