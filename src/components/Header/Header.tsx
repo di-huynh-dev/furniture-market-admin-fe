@@ -130,14 +130,16 @@ const HeaderComponent = ({ auth }: { auth: LoginData }) => {
               {searchResults.map((result) => (
                 <div key={result.id} className="px-2 hover:bg-gray-100 cursor-pointer">
                   {isStoreType(result) ? (
-                    <div className="grid grid-cols-4 gap-1">
-                      <img src={result.logo} className=" w-20 col-span-1" alt="" />
-                      <div className="gap-2 col-span-3">
-                        <p>
-                          {result.shopName} - {result.address}
-                        </p>
+                    <Link to={`/store-detail/${result.id}`}>
+                      <div className="grid grid-cols-4 gap-1">
+                        <img src={result.logo} className=" w-20 col-span-1" alt="" />
+                        <div className="gap-2 col-span-3">
+                          <p>
+                            {result.shopName} - {result.address}
+                          </p>
+                        </div>
                       </div>
-                    </div>
+                    </Link>
                   ) : (
                     <Link to={`/order-detail/${result.id}`}>
                       <p>

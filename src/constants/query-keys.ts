@@ -11,4 +11,5 @@ export const query_keys = {
   MARKETING: 'MARKETING',
   STORE_LIST: 'STORE_LIST',
   ORDER_DETAIL: 'ORDER_DETAIL',
+  SHOP_DETAIL: 'SHOP_DETAIL',
 }

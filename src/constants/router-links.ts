@@ -21,4 +21,5 @@ export const admin_routes = {
   store: '/stores',
   return_orders: '/return-orders',
   order_detail: '/order-detail/:id',
+  shop_detail: '/store-detail/:id',
 }

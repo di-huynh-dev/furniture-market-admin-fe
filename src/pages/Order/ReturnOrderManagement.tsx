@@ -102,11 +102,12 @@ const ReturnOrderManagement = () => {
       children: (
         <>
           <DataTable
-            title="Danh sách yêu cầu hoàn trả đã xử lý"
+            title="Danh sách yêu cầu hoàn trả chưa xử lý"
             columns={columns}
             data={data}
             pagination
             progressPending={isLoading}
+            progressComponent={<LoadingComponent />}
           />
         </>
       ),
@@ -117,7 +118,7 @@ const ReturnOrderManagement = () => {
       children: (
         <>
           <DataTable
-            title="Danh sách yêu cầu hoàn trả chưa xử lý"
+            title="Danh sách yêu cầu hoàn trả đã xử lý"
             columns={columns}
             data={data}
             progressComponent={<LoadingComponent />}

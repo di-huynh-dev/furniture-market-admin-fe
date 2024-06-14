@@ -10,6 +10,7 @@ import {
   ReturnOrderManagement,
   RoleManagement,
   ShopReportManagement,
+  StoreDetail,
   StoreManagement,
   SystemUsersManagement,
   TransactionManagement,
@@ -110,6 +111,10 @@ function App() {
         {
           path: admin_routes.order_detail,
           element: <OrderDetail />,
+        },
+        {
+          path: admin_routes.shop_detail,
+          element: <StoreDetail />,
         },
         {
           path: admin_routes.return_orders,
