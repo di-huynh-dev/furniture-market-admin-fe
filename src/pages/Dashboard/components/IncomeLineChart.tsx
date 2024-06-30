@@ -52,16 +52,16 @@ const IncomeLineChart: React.FC<LineProps> = ({ data }) => {
           text: 'Ngày',
         },
       },
-      y2: {
+      y1: {
         type: 'linear',
-        position: 'right',
+        position: 'left',
         title: {
           display: true,
-          text: 'Số đơn hàng',
+          text: 'Số tiền (VNĐ)',
         },
-        max: Math.max(...data.incomeByDays.map((item) => item.incomeByDay)) + 1,
+
         ticks: {
-          stepSize: 1,
+          stepSize: 1000000,
         },
         grid: {
           drawOnChartArea: false,
