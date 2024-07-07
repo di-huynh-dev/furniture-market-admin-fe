@@ -142,13 +142,15 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className="rounded-md border w-full py-4 justify-center bg-white my-2">
-        <IncomeLineChart data={statistics} />
+      <div className="grid lg:grid-cols-2 grid-cols-1 gap-2">
+        <div className="rounded-md border w-full py-4 justify-center bg-white my-2 h-[500px]">
+          <IncomeLineChart data={statistics} />
+        </div>
+        <div className="rounded-md border w-full py-4 justify-center bg-white my-2 h-[500px]">
+          <MarketingIncomeLineChart data={statistics} />
+        </div>
       </div>
-      <div className="rounded-md border w-full py-4 justify-center bg-white my-2">
-        <MarketingIncomeLineChart data={statistics} />
-      </div>
-      <div className="rounded-md border w-full py-4 justify-center bg-white my-2">
+      <div className="rounded-md border w-full py-4 justify-center bg-white my-2 h-[500px]">
         <OrderBarChart data={statistics} />
       </div>
     </div>
