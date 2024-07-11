@@ -1,13 +1,15 @@
 import commonApi from '@/api/commonApi'
-import { useAuthStoreSelectors } from '@/store/auth-store'
+import useAuthStore, { useAuthStoreSelectors } from '@/store/auth-store'
 
 const useRefreshToken = () => {
+  const selectRefreshToken = useAuthStore((state) => state.selectRefreshToken)
+
   const addAuth = useAuthStoreSelectors.use.addAuth()
 
   const removeAuth = useAuthStoreSelectors.use.removeAuth()
   const refresh = async () => {
     try {
-      const resp = await commonApi.refreshToken()
+      const resp = await commonApi.refreshToken(selectRefreshToken())
       if (resp.status === 200) {
         addAuth(resp.data.data)
         return resp.data.data.accessToken
@@ -17,7 +19,6 @@ const useRefreshToken = () => {
       }
     } catch (error) {
       removeAuth()
-      await commonApi.logout()
     }
   }
   return refresh

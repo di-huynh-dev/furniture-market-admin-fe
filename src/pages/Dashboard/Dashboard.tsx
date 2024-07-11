@@ -13,6 +13,7 @@ import MarketingIncomeLineChart from './components/MarketingIncomeLineChart'
 import { GiChessQueen } from 'react-icons/gi'
 const Dashboard = () => {
   const axiosPrivate = useAxiosPrivate()
+
   const currentDate = new Date()
   const currentYear = currentDate.getFullYear()
   const currentMonth = currentDate.getMonth() + 1

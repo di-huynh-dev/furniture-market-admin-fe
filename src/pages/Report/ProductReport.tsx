@@ -29,7 +29,6 @@ const ProductReport = () => {
     },
   })
   const filteredProducts = reportedProducts?.filter((product: ReportedType) => product.type === 'PRODUCT_REPORT')
-  console.log(filteredProducts)
 
   const showReportDetails = (report: ReportedType) => {
     setCurrentReport(report)

@@ -7,6 +7,7 @@ type AuthStoreType = {
   admin_auth: LoginData
   addAuth: (data: LoginData) => void
   removeAuth: () => void
+  selectRefreshToken: () => string
 }
 
 const useAuthStore = create<AuthStoreType>()(
@@ -31,6 +32,7 @@ const useAuthStore = create<AuthStoreType>()(
           refreshToken: '',
         },
         addAuth: (loginData) => set({ admin_auth: loginData }),
+        selectRefreshToken: (): string => useAuthStore.getState().admin_auth.refreshToken,
         removeAuth: () =>
           set({
             admin_auth: {

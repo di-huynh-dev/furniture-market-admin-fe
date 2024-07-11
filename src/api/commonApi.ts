@@ -11,10 +11,8 @@ const commonApi = {
     return axiosClient.get('/user')
   },
 
-  refreshToken() {
-    return axiosClient.post('/auth/refresh', null, {
-      withCredentials: true,
-    })
+  refreshToken(token: string) {
+    return axiosClient.post(`/auth/refresh?refreshTokenId=${token}`)
   },
   logout() {
     return axiosClient.post('/auth/logout', null, {
