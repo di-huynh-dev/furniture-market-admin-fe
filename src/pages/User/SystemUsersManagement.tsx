@@ -10,6 +10,7 @@ import toast from 'react-hot-toast'
 import { useEffect, useMemo, useState } from 'react'
 import { SearchProps } from 'antd/es/input'
 import Search from 'antd/es/input/Search'
+import LoadingComponent from '@/components/Loading/LoadingComponent'
 
 const SystemUsersManagement = () => {
   const axiosPrivate = useAxiosPrivate()
@@ -133,8 +134,6 @@ const SystemUsersManagement = () => {
       ),
     },
   ]
-
-  if (isLoading) return <div>Loading</div>
   if (isError) return <div>Lỗi </div>
   return (
     <div>
@@ -183,6 +182,8 @@ const SystemUsersManagement = () => {
         title="Quản lý người dùng hệ thống"
         columns={columns}
         data={filteredItems}
+        progressPending={isLoading}
+        progressComponent={<LoadingComponent />}
         subHeader
         subHeaderComponent={subHeaderComponentMemo}
         pagination
