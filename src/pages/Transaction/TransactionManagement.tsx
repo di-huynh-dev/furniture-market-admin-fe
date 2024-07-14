@@ -6,7 +6,6 @@ import { formatPrice } from '@/utils/helpers'
 import { useQuery } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import DataTable, { TableColumn } from 'react-data-table-component'
-import { HiArrowRightEndOnRectangle, HiArrowRightOnRectangle } from 'react-icons/hi2'
 
 const TransactionManagement = () => {
   const axiosPrivate = useAxiosPrivate()
@@ -41,18 +40,22 @@ const TransactionManagement = () => {
       cell: (row) =>
         row.type === 'CHARGE' ? (
           <div className="flex gap-1 items-center">
-            <HiArrowRightEndOnRectangle className="w-6 h-6" /> <p>Nạp</p>
+            <p>Nạp</p>
+          </div>
+        ) : row.type === 'ORDER_INCOME' ? (
+          <div className="flex gap-1 items-center">
+            <p>Lợi nhuận đơn hàng</p>
           </div>
         ) : (
           <div className="flex gap-1 items-center">
-            <HiArrowRightOnRectangle className="w-6 h-6" /> <p>Rút</p>
+            <p>Rút</p>
           </div>
         ),
     },
     {
       name: 'Giá trị',
       cell: (row) =>
-        row.type === 'CHARGE' ? (
+        row.type === 'CHARGE' || row.type === 'ORDER_INCOME' ? (
           <p className="text-green-500">{formatPrice(row.value)}</p>
         ) : (
           <p className="text-red-500">{formatPrice(row.value * -1)}</p>
